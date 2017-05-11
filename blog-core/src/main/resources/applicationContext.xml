@@ -17,12 +17,15 @@
     <!-- 可以扫描@Transactional -->
     <tx:annotation-driven transaction-manager="txManager" />
 
-    <context:property-placeholder location="classpath:dbconfig.properties"/>
+    <context:property-placeholder location="classpath:redisconfig.properties"/>
+    <!--
+    <context:property-placeholder location="classpath:redisconfig.properties" />
+    -->
     <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="driverClassName" value="${driverClassName}"/>
-        <property name="url" value="${jdbc_url}"/>
-        <property name="username" value="${mybatis_username}"/>
-        <property name="password" value="${mybatis_password}"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost/blog?useUnicode=true&amp;characterEncoding=uft8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;zeroDateTimeBehavior=convertToNull"/>
+        <property name="username" value="root"/>
+        <property name="password" value="123lcg"/>
 
         <!-- 初始化连接大小 -->
         <property name="initialSize" value="0" />
@@ -35,7 +38,7 @@
         <!-- 获取连接最大等待时间 -->
         <property name="maxWait" value="60000" />
         <!-- 测试有效用的SQL Query -->
-        <property name="validationQuery" value="${validationQuery}"/>
+        <property name="validationQuery" value="select 1"/>
         <!-- 获取连接时测试是否有效 -->
         <property name="testOnBorrow" value="false"/>
         <!-- 归还连接时测试是由有效 -->
@@ -57,10 +60,38 @@
         <property name="filters" value="mergeStat" />
     </bean>
 
+    <!-- Jedis 配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxWaitMillis" value="${redis.maxWait}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
+    <!-- redis服务器中心-->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="poolConfig" ref="jedisPoolConfig" />
+        <property name="port" value="${redis.port}" />
+        <property name="hostName" value="${redis.host}" />
+        <property name="password" value="${redis.password}" />
+        <property name="timeout" value="${redis.timeout}" />
+    </bean>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+    </bean>
+    <!-- cache配置 -->
+    <bean id="cacheService" class="com.common.impl.CacheService" />
+
     <!-- 配置sqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
+    <!--
         <property name="mapperLocations" value="classpath:com/mapper/*.xml"/>
+    -->
     </bean>
 
     <!-- 配置Spring的事务管理器 -->
@@ -82,5 +113,4 @@
         <aop:advisor advice-ref="druid-stat-interceptor"
                      pointcut-ref="druid-stat-pointcut" />
     </aop:config>
-
 </beans>
