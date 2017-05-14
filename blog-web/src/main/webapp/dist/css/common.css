@@ -1,0 +1,68 @@
+/*reset*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,form,textarea,p,th,td,tr,table,tbody,thead,tfoot,em,strong,span,img,section,input {padding:0;margin:0;}
+table {border-collapse:collapse;border-spacing:0;}
+img {border:0 none;display:block;}
+em {font-weight:normal;font-style:normal;}
+ol,ul {list-style:none;}
+h1,h2,h3,h4,h5,h6 {font-weight:normal;font-size:100%;}
+.clearFix:after{content:' ';display:block;height:0;clear:both;overflow:hidden;visibility:hidden;}
+.clearFix {*zoom:1;}
+input,textarea {font-size:12px;outline:0 none;-webkit-appearance: none;border-radius: 0;}
+ul,li {list-style-type:none}
+
+body,input{
+    font-family: helvetica,Arial,"Microsoft JhengHei UI",Simhei;
+}
+
+
+.hover-scale{
+    cursor: pointer;
+}
+
+.hover-scale li:hover{
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.hover-scale li:active{
+    -webkit-transform: scale(.9);
+    -moz-transform: scale(.9);
+    -ms-transform: scale(.9);
+    -o-transform: scale(.9);
+    transform: scale(.9);
+}
+
+input.hover-scale:hover{
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+input.hover-scale:active{
+    -webkit-transform: scale(.9);
+    -moz-transform: scale(.9);
+    -ms-transform: scale(.9);
+    -o-transform: scale(.9);
+    transform: scale(.9);
+}
+
+.transition{
+    -webkit-transition: all 200ms;
+    -moz-transition: all 200ms;
+    -ms-transition: all 200ms;
+    -o-transition: all 200ms;
+    transition: all 200ms;
+}
+
+.transition>li{
+    -webkit-transition: all 200ms;
+    -moz-transition: all 200ms;
+    -ms-transition: all 200ms;
+    -o-transition: all 200ms;
+    transition: all 200ms;
+}

@@ -1,0 +1,113 @@
+
+.form-container{
+    width: 32%;
+    height: 336px;
+    min-width: 360px;
+    background-color: #fff;
+    position: relative;
+    -webkit-transform: translateY(130px);
+    -moz-transform: translateY(130px);
+    -ms-transform: translateY(130px);
+    -o-transform: translateY(130px);
+    transform: translateY(130px);
+    margin: 100px auto;
+    overflow: hidden;
+}
+
+.form input{
+    border:none;
+    background-color: transparent;
+}
+
+
+.info-form {
+    width: 200%;
+    -webkit-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -ms-transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+}
+
+.info-form h2{
+    color: #666;
+    padding-top: 15px;
+    font-size:20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.info-form form,.info-display{
+    float: left;
+    width: 50%;
+    padding: 2%;
+}
+
+.info-form input,table,li{
+    display: block;
+    width: 86%;
+    padding: 2%;
+    margin: 10px auto;
+}
+
+.info-form input[type="text"],input[type="password"],input[type="email"]{
+    font-size: 16px;
+    color: #444;
+    border-bottom: 2px solid #EC092F;
+}
+
+.info-form input[type="submit"]{
+    width: 70px;
+    height: 70px;
+    margin-top: 36px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    background-color: #EC092F;
+}
+
+.info-form label{
+    margin: 0 14px;
+}
+
+.info-form input[type="radio"]{
+    display: inline;
+    position: relative;
+    bottom: 4px;
+    padding: 6px;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0 0 2px #fff,0 0 0 4px #ccc;
+    -moz-box-shadow: 0 0 0 2px #fff,0 0 0 4px #ccc;
+    box-shadow: 0 0 0 2px #fff,0 0 0 4px #ccc;
+    font-size: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.info-form input[type="radio"].checked{
+    background-color: #EC092F;
+}
+
+.form-change{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+    color: #fff;
+    font-size: 12px;
+    background-color: #444;
+    cursor: pointer;
+}
+
+.changed .info-form {
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.form-container.changed{
+    height: 465px;
+}
