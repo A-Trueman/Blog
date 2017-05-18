@@ -12,7 +12,8 @@
     <context:annotation-config />
 
     <!-- 自动扫描 -->
-    <context:component-scan base-package="com"/>
+    <context:component-scan base-package="com.service" />
+    <context:component-scan base-package="com.dao" />
 
     <!-- 可以扫描@Transactional -->
     <tx:annotation-driven transaction-manager="txManager" />
@@ -23,7 +24,7 @@
     -->
     <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost/blog?useUnicode=true&amp;characterEncoding=uft8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;zeroDateTimeBehavior=convertToNull"/>
+        <property name="url" value="jdbc:mysql://120.25.246.250:3306/blog?useUnicode=true&amp;characterEncoding=utf8&amp;autoReconnect=true&amp;failOverReadOnly=false&amp;zeroDateTimeBehavior=convertToNull"/>
         <property name="username" value="root"/>
         <property name="password" value="123lcg"/>
 
@@ -89,9 +90,11 @@
     <!-- 配置sqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-    <!--
         <property name="mapperLocations" value="classpath:com/mapper/*.xml"/>
-    -->
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.mapper" />
     </bean>
 
     <!-- 配置Spring的事务管理器 -->

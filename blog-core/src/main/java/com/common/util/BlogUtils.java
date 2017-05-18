@@ -31,6 +31,10 @@ public final class BlogUtils {
         return ss;
     }
 
+    public static long getTime() {
+        return System.currentTimeMillis();
+    }
+
 //    public static void main(String[] agrs) {
 //        System.out.println(getUUID());
 //    }

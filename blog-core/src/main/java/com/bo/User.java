@@ -17,6 +17,9 @@ public class User {
     //用户姓名
     public String name;
 
+    //用户密码
+    public String password;
+
     //头像地址
     public String avatar;
 
@@ -36,10 +39,10 @@ public class User {
     public String phone;
 
     //描述字段
-    public String discription;
+    public String description;
 
     //性别
-    public byte sex;
+    public int sex;
 
     //注册时间
     public long createTime;
@@ -48,7 +51,7 @@ public class User {
     public long lastLoginTime;
 
     //状态
-    public byte status;
+    public int status;
 
     //扩展字段
     public String expansion;
@@ -56,18 +59,24 @@ public class User {
     public User() {}
 
 
-    public User(String id, String username, String blogName, String name, String avatar, String email, String weibo, String github, String address, String phone, String discription, byte sex, long createTime, long lastLoginTime, byte status, String expansion) {
+    public User(String id, String username, String blogName,
+                String name, String password, String avatar,
+                String email, String weibo, String github,
+                String address, String phone, String description,
+                int sex, long createTime, long lastLoginTime,
+                int status, String expansion) {
         this.id = id;
         this.username = username;
         this.blogName = blogName;
         this.name = name;
+        this.password = password;
         this.avatar = avatar;
         this.email = email;
         this.weibo = weibo;
         this.github = github;
         this.address = address;
         this.phone = phone;
-        this.discription = discription;
+        this.description = description;
         this.sex = sex;
         this.createTime = createTime;
         this.lastLoginTime = lastLoginTime;
@@ -106,6 +115,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void  setPassword(String password) {
+        this.password = password;
     }
 
     public String getAvatar() {
@@ -156,19 +173,19 @@ public class User {
         this.phone = phone;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public byte getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(byte sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -188,11 +205,11 @@ public class User {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public byte getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(byte status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

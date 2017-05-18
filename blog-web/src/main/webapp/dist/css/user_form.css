@@ -21,6 +21,7 @@
 
 
 .info-form {
+    height: 485px;
     width: 200%;
     -webkit-transition: all .3s ease-out;
     -moz-transition: all .3s ease-out;
@@ -43,7 +44,7 @@
     padding: 2%;
 }
 
-.info-form input,table,li{
+.info-form input,.info-form table,.info-form li{
     display: block;
     width: 86%;
     padding: 2%;
@@ -56,7 +57,7 @@
     border-bottom: 2px solid #EC092F;
 }
 
-.info-form input[type="submit"]{
+.info-form input[type="button"]{
     width: 70px;
     height: 70px;
     margin-top: 36px;
@@ -109,5 +110,5 @@
 }
 
 .form-container.changed{
-    height: 465px;
+    height: 485px;
 }
