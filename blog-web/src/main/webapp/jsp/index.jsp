@@ -60,11 +60,11 @@
 <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav">
-            <a class="blog-nav-item active" href="#">首页</a>
-            <a class="blog-nav-item" href="#">关注</a>
-            <a class="blog-nav-item" href="#">全站</a>
-            <a class="blog-nav-item" href="#">收藏</a>
-            <a class="blog-nav-item" href="#">我的博客</a>
+            <a class="blog-nav-item active" href="/index.html">首页</a>
+            <a class="blog-nav-item" href="/attention.html">关注</a>
+            <a class="blog-nav-item" href="/allSite.html">全站</a>
+            <a class="blog-nav-item" href="/like.html">收藏</a>
+            <a class="blog-nav-item" href="/myBlog.html">我的博客</a>
             <c:if test="${isLogin}">
                 <a class=" dropdown-toggle blog-nav-item right" id="dropdownMenu" data-toggle="dropdown">
                     ${loginName}
@@ -227,6 +227,20 @@
 
 <script>
 
+    $(".blog-nav a:not(:last-child)").click(function () {
+        if($(".blog-nav a:last-child").text() == "未登录") {
+            swal({
+                title: "请先登录账号！",
+                type: "error",
+                timer: 3000,
+                showConfirmButton: true
+            });
+            return false;
+        } else {
+            return true;
+        }
+
+    });
     $(function(){
         /**
          $('#loginModal').on('show.bs.modal', function(){
@@ -238,14 +252,14 @@
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            url: '/user/login',
+            url: '/user/login.html',
             data: jsonData,
             success: function () {
                 if (arguments.length > 1 && arguments[1] == 'success') {
                     window.location.reload();
                 } else {
                     swal({
-                        title: "Login Failed",
+                        title: "登录失败",
                         type: "error",
                         timer: 2000,
                         showConfirmButton: true
@@ -262,14 +276,14 @@
             type: 'POST',
             dataType: "json",
             contentType: 'application/json',
-            url: '/user/register',
+            url: '/user/register.html',
             data: jsonData,
 
             success: function (data) {
                 if(data == 1) {
 
                     swal({
-                        title: "Register Success",
+                        title: "注册成功",
                         type: "success",
                         timer: 3000,
                         showConfirmButton: true
@@ -279,14 +293,14 @@
                     $(".form-change").trigger('click');
                 } else if(data == 2) {
                     swal({
-                        title: "Username Repeat",
+                        title: "用户名重复",
                         type: "error",
                         timer: 2000,
                         showConfirmButton: true
                     });
                 } else {
                     swal({
-                        title: "Register Failed",
+                        title: "注册失败",
                         type: "error",
                         timer: 2000,
                         showConfirmButton: true

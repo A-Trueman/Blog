@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ArticleMapper">
+
+
+    <resultMap id="BaseResultMap" type="com.bo.Article">
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="tag" property="tag" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="pre_article" property="preArticle" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="BIGINT" />
+        <result column="read_counts" property="readCounts" jdbcType="INT" />
+        <result column="likes" property="likes" jdbcType="INT" />
+        <result column="comments" property="comments" jdbcType="INT" />
+        <result column="status" property="status" jdbcType="TINYINT" />
+    </resultMap>
+
+
+    <sql id="Article_Column_List">
+        `id`, `title`, `user_id`,
+        `username`, `tag`, `url`,
+        `pre_article`, `create_time`, `read_counts`,
+        `likes`, `comments`, `status`
+    </sql>
+
+
+    <insert id="insertArticle" parameterType="com.bo.Article">
+        INSERT INTO `article`(`id`, `title`, `username`,
+        `tag`, `pre_article`, `create_time`,
+        `status`)
+        VALUES (#{id, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR},
+        #{tag, jdbcType=VARCHAR}, #{pre_article, jdbcType=VARCHAR}, #{createTime, jdbcType=BIGINT},
+        #{status, jdbcType=TINYINT})
+    </insert>
+
+
+    <select id="selectUserPublicArticle" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT <include refid="Article_Column_List" />
+        FROM `article`
+        WHERE `username` = #{username, jdbcType=VARCHAR}
+        AND `status` = '1'
+        ORDER BY `create_time` limit 10;
+    </select>
+
+
+    <select id="selectUserPrivateArticle" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT <include refid="Article_Column_List" />
+        FROM `article`
+        WHERE `username` = #{username, jdbcType=VARCHAR}
+        AND `status` = '2'
+        ORDER BY `create_time` limit 10;
+    </select>
+
+
+    <select id="selectUserTagPublicArticle" resultMap="BaseResultMap" parameterType="map">
+        SELECT <include refid="Article_Column_List" />
+        FROM `article`
+        WHERE `username` = #{username, jdbcType=VARCHAR}
+        AND `tag` = #{tag, jdbcType=VARCHAR}
+        AND `status` = '1'
+        ORDER BY `create_time` limit 10;
+    </select>
+
+
+    <select id="selectUserTagPrivateArticle" resultMap="BaseResultMap" parameterType="map">
+        SELECT <include refid="Article_Column_List" />
+        FROM `article`
+        WHERE `username` = #{username, jdbcType=VARCHAR}
+        AND `tag` = #{tag, jdbcType=VARCHAR}
+        AND `status` = '2'
+        ORDER BY `create_time` limit 10;
+    </select>
+
+
+    <select id="selectTagArticle" resultMap="BaseResultMap" parameterType="map">
+        SELECT <include refid="Article_Column_List" />
+        FROM `article`
+        WHERE `tag` = #{tag, jdbcType=VARCHAR}
+        AND `status` = '1'
+        ORDER BY `create_time` limit 10;
+    </select>
+
+
+    <select id="selectUsersArticle" resultMap="BaseResultMap" parameterType="map">
+        SELECT <include refid="Article_Column_List" />
+        FROM `article`
+        WHERE `username` in
+        <foreach collection="usernames" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND `status` = '1'
+        ORDER BY `create_time` limit 10;
+    </select>
+
+
+</mapper>

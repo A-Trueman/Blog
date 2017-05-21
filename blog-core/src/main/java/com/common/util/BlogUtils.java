@@ -35,7 +35,21 @@ public final class BlogUtils {
         return System.currentTimeMillis();
     }
 
-//    public static void main(String[] agrs) {
-//        System.out.println(getUUID());
-//    }
+
+    /**
+     * 从html中提取纯文本
+     *
+     * @param htmlString html字符串
+     *
+     * @return 文本内容
+     */
+    public static String html2Text(String htmlString) {
+        String regEx_script = "(?i)<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>"; // 定义script的正则表达式{或<script[^>]*?>[\\s\\S]*?<\\/script>
+        String regEx_style = "(?i)<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>"; // 定义style的正则表达式{或<style[^>]*?>[\\s\\S]*?<\\/style>
+        String regEx_html = "<[^>]+>"; // 定义HTML标签的正则表达式
+        htmlString = htmlString.replaceAll(regEx_script, "").replaceAll(regEx_style, "")
+                .replaceAll(regEx_html, "").replaceAll("[ ]+", "")
+                .replaceAll("\\s*|\t|\r|\n", "");
+        return htmlString;
+    }
 }

@@ -1,9 +1,11 @@
 package com.bo;
 
+import java.io.Serializable;
+
 /**
  * Created by Lincg on 2017/5/14.
  */
-public class User {
+public class User implements Serializable{
 
     //用户ID
     public String id;

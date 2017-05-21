@@ -249,6 +249,243 @@ a:focus {
 }
 
 
+.mod-tab {
+    border-color: #dddddd;
+    border-width: 0 0 2px;
+    margin: 0 20px;
+    border-style: none none solid;
+}
+
+.mod-tab:after {
+    clear: both;
+    height: 0;
+    display: block;
+    content: "";
+}
+
+.mod-tab .mod-tab-list {
+    position: relative;
+}
+
+.mod-tab-list ul {
+    margin-left: -10px;
+    font-family: helvetica,Arial,"Microsoft JhengHei UI",Simhei;
+}
+
+.mod-tab-list ul li {
+    width: 150px;
+    padding: 0 10px;
+    float: left;
+    outline: none;
+    list-style: none;
+    text-align: -webkit-match-parent;
+    margin: 10px auto;
+}
+
+.mod-tab-list ul li a {
+    font-size: 14px;
+    padding: 10px 0;
+    opacity: .8;
+    outline: none;
+    transition: opcacity .3s;
+    text-decoration: none;
+    color: #333333;
+}
+
+.mod-tab-list ul li a:hover{
+    opacity: 1;
+    transition: opcacity .3s;
+    text-decoration: none;
+    border-bottom: inset #e74f4d 3px;
+}
+
+.mod-tab-list .selected a{
+    opacity: 1;
+    transition: opcacity .3s;
+    text-decoration: none;
+    border-bottom: inset #e74f4d 3px;
+}
+.blog-button {
+    padding: 20px 0;
+    border-bottom: inset #DDDDDD 1px;
+}
+.button-text {
+    background: #e74f4d;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #EEEEEE;
+    font-family: "Microsoft YaHei", "微软雅黑", Helvetica, Tahoma;
+
+}
+
+.blog-button a:focus,.blog-button a:visited {
+    color: #EEEEEE;
+    text-decoration: none;
+}
+.blog-button a:hover {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.list-unstyled li{
+    margin: 10px 0;
+}
+/*
+ * 复选框
+ */
+.blog-form select {
+    width: 80px;
+    /*注意在下拉框中，width是包括border的宽度的*/
+
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #e74f4d;
+    background-color: white;
+    background-repeat: no-repeat;
+    /*背景图像的尺寸：第一个值为宽度，第二值为高度*/
+
+    background-size: 8px 8px, 8px 8px, 30px 30px, 1px 30px;
+    /*背景图片：多张图片用","分割*/
+    /*repeating-linear-gradient() 函数用于重复线性渐变：参数分别为角度，颜色1，颜色2,...*/
+
+    background-image: repeating-linear-gradient(225deg, rgb(105, 123, 149) 0%, rgb(105, 123, 149) 50%, transparent 50%, transparent 100%),
+        /*组合成三角形图标*/
+
+    repeating-linear-gradient(135deg, rgb(105, 123, 149) 0%, rgb(105, 123, 149) 50%, transparent 50%, transparent 100%),
+        /*组合成三角形图标*/
+
+    linear-gradient(#FFFFFF 0%, #F8F9Fd, #EFFAFA 100%),
+        /*竖分割线右侧的背景色*/
+
+    repeating-linear-gradient( rgb(191, 204, 220) 0%, rgb(191, 204, 220) 100%);
+    /*竖分割线*/
+    /*背景图片的位置：第一个参数为水平位置，第二参数为垂直位置*/
+
+    background-position: 55px 10px, 63px 10px, right top, 47px top;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+.blog-form select:focus{
+    outline: 0;
+}
+
+
+.blog-form input[type="text"]{
+    font-size: 16px;
+    color: #444;
+}
+.blog-form label{
+    margin: 0;
+}
+.write-blog-status{
+    margin: 10px 0;
+}
+.write-blog-tag{
+    margin: 10px 0;
+    width: 250px;
+    border-bottom: 2px solid #EC092F;
+}
+.write-blog-title{
+    margin: 10px 0;
+    border-bottom: 2px solid #EC092F;
+}
+.write-blog-title input[type="text"]{
+    width: 80%;
+}
+/*
+ * Button
+ */
+
+.button,.button:visited {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding: .5em 2em .55em;
+    margin-right: 10px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.button:hover {
+    text-decoration: none;
+}
+.button:active {
+    position: relative;
+    top: 1px;
+}
+
+.white {
+    color: #606060;
+    border: solid 1px #b7b7b7;
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+    background: -moz-linear-gradient(top, #fff, #ededed);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+}
+.white:hover {
+    background: #ededed;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+    background: -moz-linear-gradient(top, #fff, #dcdcdc);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+}
+.white:active {
+    color: #999;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+    background: -moz-linear-gradient(top, #ededed, #fff);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
+}
+
+.blue,.blue:visited {
+    color: #d9eef7;
+    border: solid 1px #0076a3;
+    background: #0095cd;
+    background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+    background: -moz-linear-gradient(top, #00adee, #0078a5);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+}
+.blue:hover {
+    background: #007ead;
+    background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+    background: -moz-linear-gradient(top, #0095cc, #00678e);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0095cc', endColorstr='#00678e');
+}
+.blue:active {
+    color: #80bed6;
+    background: -webkit-gradient(linear, left top, left bottom, from(#0078a5), to(#00adee));
+    background: -moz-linear-gradient(top, #0078a5, #00adee);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0078a5', endColorstr='#00adee');
+}
+
+.red,.red:visited {
+    color: #faddde;
+    border: solid 1px #980c10;
+    background: #d81b21;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ed1c24), to(#aa1317));
+    background: -moz-linear-gradient(top, #ed1c24, #aa1317);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ed1c24', endColorstr='#aa1317');
+}
+.red:hover {
+    color: #FFFFFF;
+    background: #b61318;
+    background: -webkit-gradient(linear, left top, left bottom, from(#c9151b), to(#a11115));
+    background: -moz-linear-gradient(top, #c9151b, #a11115);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c9151b', endColorstr='#a11115');
+}
+
+.red:active {
+    color: #FFFFFF;
+    background: -webkit-gradient(linear, left top, left bottom, from(#aa1317), to(#ed1c24));
+    background: -moz-linear-gradient(top, #aa1317, #ed1c24);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aa1317', endColorstr='#ed1c24');
+}
 /*
  * Footer
  */
@@ -262,4 +499,17 @@ a:focus {
 }
 .blog-footer p:last-child {
     margin-bottom: 0;
+}
+
+/*
+ * iframe
+ */
+iframe {
+    vertical-align: top;
+    overflow: hidden;
+    border: 0;
+}
+
+.content {
+    margin:5px;
 }

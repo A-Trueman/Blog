@@ -91,6 +91,36 @@ public class SFTPUtil {
     }
 
 
+
+    /**
+     * sftp上传文件(夹)
+     *
+     * @param directory 目标地址
+     * @param uploadFile 上传文件
+     * @param sftp sftp连接
+     *
+     * @throws Exception
+     */
+    public static void upload(String directory, File uploadFile, ChannelSftp sftp) throws Exception {
+        if (uploadFile.exists()) {
+            try {
+                //因为ChannelSftp无法判断远程Linux主机的文件路径，所以通过这种方式判断
+                Vector content = sftp.ls(directory);
+                if (content == null) {
+                    sftp.mkdir(directory);
+                }
+            } catch (SftpException e) {
+                sftp.mkdir(directory);
+            }
+            sftp.cd(directory);
+            if (uploadFile.isFile()) {
+                InputStream inputStream = new FileInputStream(uploadFile);
+                sftp.put(inputStream, new String(uploadFile.getName().getBytes(), "UTF-8"));
+            }
+        }
+    }
+
+
     /**
      * sftp下载文件（夹）
      *

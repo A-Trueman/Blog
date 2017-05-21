@@ -13,6 +13,13 @@
 
     <mvc:annotation-driven />
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.interceptor.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
             <list>
@@ -33,4 +40,5 @@
         <property name="prefix" value="/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
+
 </beans>

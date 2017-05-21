@@ -1,7 +1,5 @@
 package com.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.bo.User;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +20,12 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/index")
+    @RequestMapping(value = "/index.html")
     public String index() {
         return "/index";
     }
 
-    @RequestMapping("/user/login")
+    @RequestMapping("/user/login.html")
     public ModelAndView login(@RequestBody User user, HttpSession session) {
 
         ModelAndView modelAndView = new ModelAndView();
@@ -43,7 +41,7 @@ public class LoginController {
     }
 
 
-    @RequestMapping("/user/register")
+    @RequestMapping("/user/register.html")
     @ResponseBody
     public int register(@RequestBody User user) {
         return userService.registerUser(user);
