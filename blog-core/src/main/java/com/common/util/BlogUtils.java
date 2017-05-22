@@ -4,6 +4,8 @@ package com.common.util;
 
 import org.apache.commons.lang3.SystemUtils;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -51,5 +53,19 @@ public final class BlogUtils {
                 .replaceAll(regEx_html, "").replaceAll("[ ]+", "")
                 .replaceAll("\\s*|\t|\r|\n", "");
         return htmlString;
+    }
+
+
+    public static String longTime2Text(long time) {
+	    Date date = new Date(time);
+        return date.toString();
+    }
+
+    public static void main(String agrs[]) {
+    	String str = longTime2Text(System.currentTimeMillis());
+    	String[] string = str.split(" ");
+    	for (String s : string) {
+    		System.out.println(s);
+	    }
     }
 }

@@ -37,40 +37,22 @@
     </insert>
 
 
-    <select id="selectUserPublicArticle" resultMap="BaseResultMap" parameterType="java.lang.String">
+    <select id="selectUserArticle" resultMap="BaseResultMap" parameterType="map">
         SELECT <include refid="Article_Column_List" />
         FROM `article`
         WHERE `username` = #{username, jdbcType=VARCHAR}
-        AND `status` = '1'
+        AND `status` = #{status, jdbcType=TINYINT}
         ORDER BY `create_time` limit 10;
     </select>
 
 
-    <select id="selectUserPrivateArticle" resultMap="BaseResultMap" parameterType="java.lang.String">
-        SELECT <include refid="Article_Column_List" />
-        FROM `article`
-        WHERE `username` = #{username, jdbcType=VARCHAR}
-        AND `status` = '2'
-        ORDER BY `create_time` limit 10;
-    </select>
 
-
-    <select id="selectUserTagPublicArticle" resultMap="BaseResultMap" parameterType="map">
+    <select id="selectUserTagArticle" resultMap="BaseResultMap" parameterType="map">
         SELECT <include refid="Article_Column_List" />
         FROM `article`
         WHERE `username` = #{username, jdbcType=VARCHAR}
         AND `tag` = #{tag, jdbcType=VARCHAR}
-        AND `status` = '1'
-        ORDER BY `create_time` limit 10;
-    </select>
-
-
-    <select id="selectUserTagPrivateArticle" resultMap="BaseResultMap" parameterType="map">
-        SELECT <include refid="Article_Column_List" />
-        FROM `article`
-        WHERE `username` = #{username, jdbcType=VARCHAR}
-        AND `tag` = #{tag, jdbcType=VARCHAR}
-        AND `status` = '2'
+        AND `status` = #{status, jdbcType=TINYINT}
         ORDER BY `create_time` limit 10;
     </select>
 
@@ -79,7 +61,7 @@
         SELECT <include refid="Article_Column_List" />
         FROM `article`
         WHERE `tag` = #{tag, jdbcType=VARCHAR}
-        AND `status` = '1'
+        AND `status` = #{status, jdbcType=TINYINT}
         ORDER BY `create_time` limit 10;
     </select>
 
@@ -91,7 +73,7 @@
         <foreach collection="usernames" item="item" index="index" open="(" separator="," close=")">
             #{item}
         </foreach>
-        AND `status` = '1'
+        AND `status` = #{status, jdbcType=VARCHAR}
         ORDER BY `create_time` limit 10;
     </select>
 

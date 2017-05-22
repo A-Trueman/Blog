@@ -4,12 +4,13 @@ import com.bo.User;
 import com.dao.UserDao;
 import com.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by Lincg on 2017/5/16.
  */
-@Component
+
+@Repository
 public class UserDaoImpl implements UserDao {
 
     @Autowired
