@@ -37,26 +37,41 @@ public class Like implements Serializable{
     public String preArticle;
 
     //收藏时间
-    public long createTime;
+    public Long createTime;
 
     //博文创建时间
-    public long articleCreateTime;
+    public Long articleCreateTime;
 
     //阅读数量
-    public int readCounts;
+    public Integer readCounts;
 
     //收藏数量
-    public int likes;
+    public Integer likes;
 
     //评论数量
-    public int comments;
+    public Integer comments;
 
     //状态
-    public int status;
+    public Byte status;
 
     public Like() {}
 
-    public Like(String id, String articleId, String title, String userId, String username, String author_id, String author_name, String tag, String url, String preArticle, long createTime, long articleCreateTime, int readCounts, int likes, int comments, int status) {
+    public Like(String id,
+                String articleId,
+                String title,
+                String userId,
+                String username,
+                String author_id,
+                String author_name,
+                String tag,
+                String url,
+                String preArticle,
+                Long createTime,
+                Long articleCreateTime,
+                Integer readCounts,
+                Integer likes,
+                Integer comments,
+                Byte status) {
         this.id = id;
         this.articleId = articleId;
         this.title = title;
@@ -155,51 +170,51 @@ public class Like implements Serializable{
         this.preArticle = preArticle;
     }
 
-    public long getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
-    public long getArticleCreateTime() {
+    public Long getArticleCreateTime() {
         return articleCreateTime;
     }
 
-    public void setArticleCreateTime(long articleCreateTime) {
+    public void setArticleCreateTime(Long articleCreateTime) {
         this.articleCreateTime = articleCreateTime;
     }
 
-    public int getReadCounts() {
+    public Integer getReadCounts() {
         return readCounts;
     }
 
-    public void setReadCounts(int readCounts) {
+    public void setReadCounts(Integer readCounts) {
         this.readCounts = readCounts;
     }
 
-    public int getLikes() {
+    public Integer getLikes() {
         return likes;
     }
 
-    public void setLikes(int likes) {
+    public void setLikes(Integer likes) {
         this.likes = likes;
     }
 
-    public int getComments() {
+    public Integer getComments() {
         return comments;
     }
 
-    public void setComments(int comments) {
+    public void setComments(Integer comments) {
         this.comments = comments;
     }
 
-    public int getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 }

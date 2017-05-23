@@ -33,7 +33,7 @@ public final class BlogUtils {
         return ss;
     }
 
-    public static long getTime() {
+    public static Long getTime() {
         return System.currentTimeMillis();
     }
 
@@ -62,10 +62,10 @@ public final class BlogUtils {
     }
 
     public static void main(String agrs[]) {
-    	String str = longTime2Text(System.currentTimeMillis());
-    	String[] string = str.split(" ");
-    	for (String s : string) {
-    		System.out.println(s);
-	    }
+//    	String str = longTime2Text(System.currentTimeMillis());
+//    	String[] string = str.split(" ");
+//    	for (String s : string) {
+//    		System.out.println(s);
+//	    }
     }
 }

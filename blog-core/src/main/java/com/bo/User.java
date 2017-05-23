@@ -44,16 +44,16 @@ public class User implements Serializable{
     public String description;
 
     //性别
-    public int sex;
+    public Byte sex;
 
     //注册时间
-    public long createTime;
+    public Long createTime;
 
     //上次登录时间
-    public long lastLoginTime;
+    public Long lastLoginTime;
 
     //状态
-    public int status;
+    public Byte status;
 
     //扩展字段
     public String expansion;
@@ -61,12 +61,23 @@ public class User implements Serializable{
     public User() {}
 
 
-    public User(String id, String username, String blogName,
-                String name, String password, String avatar,
-                String email, String weibo, String github,
-                String address, String phone, String description,
-                int sex, long createTime, long lastLoginTime,
-                int status, String expansion) {
+    public User(String id,
+                String username,
+                String blogName,
+                String name,
+                String password,
+                String avatar,
+                String email,
+                String weibo,
+                String github,
+                String address,
+                String phone,
+                String description,
+                Byte sex,
+                Long createTime,
+                Long lastLoginTime,
+                Byte status,
+                String expansion) {
         this.id = id;
         this.username = username;
         this.blogName = blogName;
@@ -85,7 +96,6 @@ public class User implements Serializable{
         this.status = status;
         this.expansion = expansion;
     }
-
 
     public String getId() {
         return id;
@@ -123,7 +133,7 @@ public class User implements Serializable{
         return password;
     }
 
-    public void  setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -183,35 +193,35 @@ public class User implements Serializable{
         this.description = description;
     }
 
-    public int getSex() {
+    public Byte getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Byte sex) {
         this.sex = sex;
     }
 
-    public long getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
-    public long getLastLoginTime() {
+    public Long getLastLoginTime() {
         return lastLoginTime;
     }
 
-    public void setLastLoginTime(long lastLoginTime) {
+    public void setLastLoginTime(Long lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
 
-    public int getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 

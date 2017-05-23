@@ -89,36 +89,11 @@
                 <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
                 <hr>
             </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
+            <ul class="pagination">
+                <li><a href="#" disabled>前一页</a></li>
+                <li class="active" style="background:red"><a href="#">第一页</a></li>
+                <li><a href="#">后一页</a></li>
+            </ul>
         </div>
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">

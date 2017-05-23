@@ -23,11 +23,11 @@ public class Attention implements Serializable{
     public String authorId;
 
     //关注时间
-    public String createTime;
+    public Long createTime;
 
     public Attention() {}
 
-    public Attention(String id, String username, String userId, String authorName, String authorId, String createTime) {
+    public Attention(String id, String username, String userId, String authorName, String authorId, Long createTime) {
         this.id = id;
         this.username = username;
         this.userId = userId;
@@ -76,11 +76,11 @@ public class Attention implements Serializable{
         this.authorId = authorId;
     }
 
-    public String getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 }

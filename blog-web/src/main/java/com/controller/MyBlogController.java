@@ -8,13 +8,16 @@ import com.common.util.SFTPUtil;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.Session;
+import com.service.ArticleService;
 import org.apache.commons.io.FileUtils;
 import org.aspectj.util.FileUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,6 +31,9 @@ import java.io.PrintStream;
 @Controller
 public class MyBlogController {
 
+    @Autowired
+    private ArticleService articleService;
+
     @RequestMapping("/myBlog.html")
     public String getBlog(HttpSession session){
         return "/myBlog";
@@ -35,7 +41,12 @@ public class MyBlogController {
 
 
     @RequestMapping(value = "/myBlogList.html",method = RequestMethod.GET)
-    public String getMyBlog(HttpSession session) {
+    public String getMyBlog(HttpSession session, HttpServletRequest request) {
+
+        String username = (String) session.getAttribute("username");
+        String lastDateTime = request.getParameter("lastDateTime");
+        String lessDateTime = request.getParameter("lessDateTime");
+
         return "myBlogList";
     }
 
@@ -96,7 +107,9 @@ public class MyBlogController {
         article.setTitle(data.getString("title"));
         article.setCreateTime(BlogUtils.getTime());
         article.setPreArticle(preHtml);
-        article.setStatus(data.getInteger("status"));
+        article.setStatus(data.getByte("status"));
+
+        articleService.saveArticle(article);
         return "/writeBlog";
     }
 

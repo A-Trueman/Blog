@@ -23,7 +23,7 @@ public interface UserService {
                      String password,
                      String email,
                      String phone,
-                     int sex);
+                     Byte sex);
 
 
     /**

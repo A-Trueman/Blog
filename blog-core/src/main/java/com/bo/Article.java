@@ -29,23 +29,34 @@ public class Article implements Serializable{
     public String preArticle;
 
     //创建时间
-    public long createTime;
+    public Long createTime;
 
     //阅读数量
-    public int readCounts;
+    public Integer readCounts;
 
     //收藏数量
-    public int likes;
+    public Integer likes;
 
     //评论数量
-    public int comments;
+    public Integer comments;
 
     //状态 0：无效，1：公开，2：私密
-    public int status;
+    public Byte status;
 
     public Article() {}
 
-    public Article(String id, String title, String userId, String username, String tag, String url, String preArticle, long createTime, int readCounts, int likes, int comments, int status) {
+    public Article(String id,
+                   String title,
+                   String userId,
+                   String username,
+                   String tag,
+                   String url,
+                   String preArticle,
+                   Long createTime,
+                   Integer readCounts,
+                   Integer likes,
+                   Integer comments,
+                   Byte status) {
         this.id = id;
         this.title = title;
         this.userId = userId;
@@ -116,43 +127,43 @@ public class Article implements Serializable{
         this.preArticle = preArticle;
     }
 
-    public long getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(long createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
-    public int getReadCounts() {
+    public Integer getReadCounts() {
         return readCounts;
     }
 
-    public void setReadCounts(int readCounts) {
+    public void setReadCounts(Integer readCounts) {
         this.readCounts = readCounts;
     }
 
-    public int getLikes() {
+    public Integer getLikes() {
         return likes;
     }
 
-    public void setLikes(int likes) {
+    public void setLikes(Integer likes) {
         this.likes = likes;
     }
 
-    public int getComments() {
+    public Integer getComments() {
         return comments;
     }
 
-    public void setComments(int comments) {
+    public void setComments(Integer comments) {
         this.comments = comments;
     }
 
-    public int getStatus() {
+    public Byte getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Byte status) {
         this.status = status;
     }
 }
