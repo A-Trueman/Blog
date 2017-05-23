@@ -3,7 +3,6 @@ package com.dao;
 import com.bo.Article;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by nuomifan on 2017/5/22.
@@ -32,9 +31,9 @@ public interface ArticleDao {
 	 * @return 博文
 	 */
 	List<Article> selectUserArticle(String username,
-	                                long lastDateTime,
-	                                long lessDateTime,
-	                                int status);
+	                                Long lastDateTime,
+	                                Long lessDateTime,
+	                                Byte status);
 
 
 
@@ -51,9 +50,9 @@ public interface ArticleDao {
 	 */
 	List<Article> selectUserTagArticle(String username,
 	                                   String tag,
-	                                   long lastDateTime,
-	                                   long lessDateTime,
-	                                   int status);
+	                                   Long lastDateTime,
+	                                   Long lessDateTime,
+	                                   Byte status);
 
 
 	/**
@@ -74,9 +73,9 @@ public interface ArticleDao {
 	 * @return 博文
 	 */
 	List<Article> selectTagArticle(String tag,
-	                               long lastDateTime,
-	                               long lessDateTime,
-	                               int status);
+	                               Long lastDateTime,
+	                               Long lessDateTime,
+	                               Byte status);
 
 
 	/**
@@ -97,7 +96,7 @@ public interface ArticleDao {
 	 * @return 博文
 	 */
 	List<Article> selectUsersArticle(List<String> usernames,
-	                                 long lastDateTime,
-	                                 long lessDateTime,
-	                                 int status);
+	                                 Long lastDateTime,
+	                                 Long lessDateTime,
+	                                 Byte status);
 }

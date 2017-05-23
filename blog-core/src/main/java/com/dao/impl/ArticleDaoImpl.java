@@ -46,9 +46,9 @@ public class ArticleDaoImpl implements ArticleDao{
 	 * @return 博文
 	 */
 	public List<Article> selectUserArticle(String username,
-	                                       long lastDateTime,
-	                                       long lessDateTime,
-	                                       int status) {
+	                                       Long lastDateTime,
+	                                       Long lessDateTime,
+	                                       Byte status) {
 
 		Map<String, Object> cond = new HashMap<>();
 		cond.put("username", username);
@@ -74,9 +74,9 @@ public class ArticleDaoImpl implements ArticleDao{
 	 */
 	public List<Article> selectUserTagArticle(String username,
 	                                          String tag,
-	                                          long lastDateTime,
-	                                          long lessDateTime,
-	                                          int status) {
+	                                          Long lastDateTime,
+	                                          Long lessDateTime,
+	                                          Byte status) {
 
 		Map<String, Object> cond = new HashMap<>();
 		cond.put("username", username);
@@ -100,9 +100,9 @@ public class ArticleDaoImpl implements ArticleDao{
 	 * @return 博文
 	 */
 	public List<Article> selectTagArticle(String tag,
-	                                      long lastDateTime,
-	                                      long lessDateTime,
-	                                      int status) {
+	                                      Long lastDateTime,
+	                                      Long lessDateTime,
+	                                      Byte status) {
 
 		Map<String, Object> cond = new HashMap<>();
 		cond.put("tag", tag);
@@ -125,9 +125,9 @@ public class ArticleDaoImpl implements ArticleDao{
 	 * @return 博文
 	 */
 	public List<Article> selectUsersArticle(List<String> usernames,
-	                                        long lastDateTime,
-	                                        long lessDateTime,
-	                                        int status) {
+	                                        Long lastDateTime,
+	                                        Long lessDateTime,
+	                                        Byte status) {
 
 		Map<String, Object> cond = new HashMap<>();
 		cond.put("usernames", usernames);

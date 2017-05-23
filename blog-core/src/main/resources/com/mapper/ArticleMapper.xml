@@ -42,7 +42,7 @@
         FROM `article`
         WHERE `username` = #{username, jdbcType=VARCHAR}
         AND `status` = #{status, jdbcType=TINYINT}
-        ORDER BY `create_time` limit 10;
+        ORDER BY `create_time` limit 5;
     </select>
 
 

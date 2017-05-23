@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
                             String password,
                             String email,
                             String phone,
-                            int sex) {
+                            Byte sex) {
         User user = new User();
         if (userDao.isExits(username)) {
             return 2;
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(email);
         user.setPhone(phone);
         user.setSex(sex);
-        long time = BlogUtils.getTime();
+        Long time = BlogUtils.getTime();
         user.setCreateTime(time);
         user.setLastLoginTime(time);
         return userDao.insertUser(user);
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
             return 2;
         }
         user.setId(BlogUtils.getUUID());
-        long time = BlogUtils.getTime();
+        Long time = BlogUtils.getTime();
         user.setCreateTime(time);
         user.setLastLoginTime(time);
         return userDao.insertUser(user);
