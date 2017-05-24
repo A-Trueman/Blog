@@ -7,13 +7,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-    boolean isLogin = false;
-    String loginName = (String)session.getAttribute("username");
-    if (loginName != null && !"".equals(loginName)) {
-        isLogin = true;
-    }
-    request.setAttribute("isLogin", isLogin);
-    request.setAttribute("loginName", loginName);
+    
 %>
 <html lang="zh-CN">
 <head>
@@ -59,39 +53,18 @@
             <div class="blog-button">
                 <a href="/writeBlog.html" class="button-text">写日志</a>
             </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
+            <c:forEach items="${articles}" var="article">
+                <div class="blog-post">
+                    <a class="blog-post-title">${article.title}</a>
+                    <p>${article.preArticle}</p>
+                    <p class="blog-post-meta right clearfix">${article.createTime} by <a href= ${article.usernameUrl}>${article.username}</a> 阅读数量(${article.readCounts})</p>
+                    <hr>
+                </div>
+            </c:forEach>
+
             <ul class="pagination">
                 <li><a href="#" disabled>前一页</a></li>
-                <li class="active" style="background:red"><a href="#">第一页</a></li>
+                <li class="active"><a href="#">第一页</a></li>
                 <li><a href="#">后一页</a></li>
             </ul>
         </div>

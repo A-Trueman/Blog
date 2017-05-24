@@ -58,14 +58,16 @@ public final class BlogUtils {
 
     public static String longTime2Text(long time) {
 	    Date date = new Date(time);
-        return date.toString();
+	    String[] strs = date.toString().split(" ");
+	    String string = strs[1] + " " + strs[2] + "," + strs[5];
+        return string;
     }
 
     public static void main(String agrs[]) {
-//    	String str = longTime2Text(System.currentTimeMillis());
-//    	String[] string = str.split(" ");
-//    	for (String s : string) {
-//    		System.out.println(s);
-//	    }
+    	String str = longTime2Text(System.currentTimeMillis());
+    	String[] string = str.split(" ");
+    	for (String s : string) {
+    		System.out.println(s);
+	    }
     }
 }

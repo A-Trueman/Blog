@@ -75,6 +75,7 @@ public class SFTPUtil {
             if (file.isFile()) {
                 InputStream inputStream = new FileInputStream(file);
                 sftp.put(inputStream, new String(file.getName().getBytes(), "UTF-8"));
+                inputStream.close();
             } else {
                 File[] files = file.listFiles();
                 for (File f : files) {
@@ -116,6 +117,7 @@ public class SFTPUtil {
             if (uploadFile.isFile()) {
                 InputStream inputStream = new FileInputStream(uploadFile);
                 sftp.put(inputStream, new String(uploadFile.getName().getBytes(), "UTF-8"));
+                inputStream.close();
             }
         }
     }

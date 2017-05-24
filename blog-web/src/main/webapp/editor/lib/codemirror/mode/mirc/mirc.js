@@ -46,7 +46,7 @@ CodeMirror.defineMode("mirc", function() {
                             "$modefirst $modelast $modespl $mouse $msfile $network $newnick $nick $nofile " +
                             "$nopath $noqt $not $notags $notify $null $numeric $numok $oline $onpoly " +
                             "$opnick $or $ord $os $passivedcc $pic $play $pnick $port $portable $portfree " +
-                            "$pos $prefix $prop $protect $puttok $qt $query $rand $r $rawmsg $read $readomo " +
+                            "$pos $prefix $prop $protect $puttok $qt $vo $rand $r $rawmsg $read $readomo " +
                             "$readn $regex $regml $regsub $regsubex $remove $remtok $replace $replacex " +
                             "$reptok $result $rgb $right $round $scid $scon $script $scriptdir $scriptline " +
                             "$sdir $send $server $serverip $sfile $sha1 $shortfn $show $signal $sin " +
@@ -70,7 +70,7 @@ CodeMirror.defineMode("mirc", function() {
                             "ialmark identd if ignore iline inc invite iuser join kick linesep links list " +
                             "load loadbuf localinfo log mdi me menubar mkdir mnick mode msg nick noop notice " +
                             "notify omsg onotice part partall pdcc perform play playctrl pop protect pvoice " +
-                            "qme qmsg query queryn quit raw reload remini remote remove rename renwin " +
+                            "qme qmsg vo queryn quit raw reload remini remote remove rename renwin " +
                             "reseterror resetidle return rlevel rline rmdir run ruser save savebuf saveini " +
                             "say scid scon server set showmirc signam sline sockaccept sockclose socklist " +
                             "socklisten sockmark sockopen sockpause sockread sockrename sockudp sockwrite " +

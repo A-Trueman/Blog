@@ -8,55 +8,55 @@ import java.io.Serializable;
 public class User implements Serializable{
 
     //用户ID
-    public String id;
+    private String id;
 
     //用户名
-    public String username;
+    private String username;
 
     //博客名称
-    public String blogName;
+    private String blogName;
 
     //用户姓名
-    public String name;
+    private String name;
 
     //用户密码
-    public String password;
+    private String password;
 
     //头像地址
-    public String avatar;
+    private String avatar;
 
     //邮箱
-    public String email;
+    private String email;
 
     //微博
-    public String weibo;
+    private String weibo;
 
     //GitHub地址
-    public String github;
+    private String github;
 
     //地址
-    public String address;
+    private String address;
 
     //手机号
-    public String phone;
+    private String phone;
 
     //描述字段
-    public String description;
+    private String description;
 
     //性别
-    public Byte sex;
+    private Byte sex;
 
     //注册时间
-    public Long createTime;
+    private Long createTime;
 
     //上次登录时间
-    public Long lastLoginTime;
+    private Long lastLoginTime;
 
     //状态
-    public Byte status;
+    private Byte status;
 
     //扩展字段
-    public String expansion;
+    private String expansion;
 
     public User() {}
 

@@ -7,7 +7,7 @@
   var mode = CodeMirror.getMode({tabSize: 4, indentUnit: 2}, "slim");
   function MT(name) { test.mode(name, mode, Array.prototype.slice.call(arguments, 1)); }
 
-  // Requires at least one media query
+  // Requires at least one media vo
   MT("elementName",
      "[tag h1] Hey There");
 
