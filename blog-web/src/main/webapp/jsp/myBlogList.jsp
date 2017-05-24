@@ -57,15 +57,26 @@
                 <div class="blog-post">
                     <a class="blog-post-title">${article.title}</a>
                     <p>${article.preArticle}</p>
-                    <p class="blog-post-meta right clearfix">${article.createTime} by <a href= ${article.usernameUrl}>${article.username}</a> 阅读数量(${article.readCounts})</p>
+                    <p class="blog-post-meta right">${article.createTime}&nbsp;&nbsp;by&nbsp;&nbsp;<a href= ${article.usernameUrl}>${article.username}</a>&nbsp;&nbsp; 阅读数量(${article.readCounts})</p>
+                    <p class="clear"></p>
                     <hr>
                 </div>
             </c:forEach>
 
             <ul class="pagination">
-                <li><a href="#" disabled>前一页</a></li>
+                <c:if test="${lessDateTime == null}">
+                    <li class="disabled"><a href="#">前一页</a></li>
+                </c:if>
+                <c:if test="${lessDateTime != null } ">
+                    <li><a href="#">前一页</a></li>
+                </c:if>
                 <li class="active"><a href="#">第一页</a></li>
-                <li><a href="#">后一页</a></li>
+                <c:if test="${lastDateTime == null}">
+                    <li class="disabled"><a href="#">后一页</a></li>
+                </c:if>
+                <c:if test="${lastDateTime != null}">
+                    <li><a href="#">后一页</a></li>
+                </c:if>
             </ul>
         </div>
 

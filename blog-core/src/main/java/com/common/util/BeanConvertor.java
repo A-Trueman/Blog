@@ -19,7 +19,11 @@ public class BeanConvertor {
 		articleVo.setUsernameUrl(SystemConst.USER_BLOG_PATH + article.getUsername());
 		articleVo.setArticleUrl(SystemConst.ARTICLE_PATH + article.getId());
 		articleVo.setCreateTime(BlogUtils.longTime2Text(article.getCreateTime()));
-		articleVo.setPreArticle(article.getPreArticle());
+		if(article.getPreArticle().trim().length() == 128) {
+			articleVo.setPreArticle(article.getPreArticle() + "...");
+		} else {
+			articleVo.setPreArticle(article.getPreArticle());
+		}
 		articleVo.setTag(article.getTag());
 		articleVo.setReadCounts(article.getReadCounts());
 		return articleVo;
