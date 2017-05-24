@@ -120,25 +120,25 @@ config = {
 	// when enabled, all tests must call expect()
 	requireExpects: false,
 
-	// add checkboxes that are persisted in the vo-string
+	// add checkboxes that are persisted in the query-string
 	// when enabled, the id is set to `true` as a `QUnit.config` property
 	urlConfig: [
 		{
 			id: "hidepassed",
 			label: "Hide passed tests",
-			tooltip: "Only show tests and assertions that fail. Stored as vo-strings."
+			tooltip: "Only show tests and assertions that fail. Stored as query-strings."
 		},
 		{
 			id: "noglobals",
 			label: "Check for Globals",
 			tooltip: "Enabling this will test if any test introduces new properties on the " +
-				"`window` object. Stored as vo-strings."
+				"`window` object. Stored as query-strings."
 		},
 		{
 			id: "notrycatch",
 			label: "No try-catch",
 			tooltip: "Enabling this will run tests outside of a try-catch block. Makes debugging " +
-				"exceptions in IE reasonable. Stored as vo-strings."
+				"exceptions in IE reasonable. Stored as query-strings."
 		}
 	],
 

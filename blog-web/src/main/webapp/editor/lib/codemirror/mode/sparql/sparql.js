@@ -169,6 +169,6 @@ CodeMirror.defineMode("sparql", function(config) {
   };
 });
 
-CodeMirror.defineMIME("application/sparql-vo", "sparql");
+CodeMirror.defineMIME("application/sparql-query", "sparql");
 
 });
