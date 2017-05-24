@@ -141,6 +141,6 @@
     }
   };
 
-  CodeMirror.defineMIME("application/x-cypher-query", "cypher");
+  CodeMirror.defineMIME("application/x-cypher-vo", "cypher");
 
 });

@@ -8,40 +8,40 @@ import java.io.Serializable;
 public class Article implements Serializable{
 
     //博文id
-    public String id;
+    private String id;
 
     //标题
-    public String title;
+    private String title;
 
     //作者id
-    public String userId;
+    private String userId;
 
     //作者名
-    public String username;
+    private String username;
 
     //标签
-    public String tag;
+    private String tag;
 
     //存储URL
-    public String url;
+    private String url;
 
     //博文预览
-    public String preArticle;
+    private String preArticle;
 
     //创建时间
-    public Long createTime;
+    private Long createTime;
 
     //阅读数量
-    public Integer readCounts;
+    private Integer readCounts;
 
     //收藏数量
-    public Integer likes;
+    private Integer likes;
 
     //评论数量
-    public Integer comments;
+    private Integer comments;
 
     //状态 0：无效，1：公开，2：私密
-    public Byte status;
+    private Byte status;
 
     public Article() {}
 

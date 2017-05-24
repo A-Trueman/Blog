@@ -12,9 +12,9 @@
         <result column="url" property="url" jdbcType="VARCHAR" />
         <result column="pre_article" property="preArticle" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="BIGINT" />
-        <result column="read_counts" property="readCounts" jdbcType="INT" />
-        <result column="likes" property="likes" jdbcType="INT" />
-        <result column="comments" property="comments" jdbcType="INT" />
+        <result column="read_counts" property="readCounts" jdbcType="INTEGER" />
+        <result column="likes" property="likes" jdbcType="INTEGER" />
+        <result column="comments" property="comments" jdbcType="INTEGER" />
         <result column="status" property="status" jdbcType="TINYINT" />
     </resultMap>
 
@@ -32,7 +32,7 @@
         `tag`, `pre_article`, `create_time`,
         `status`)
         VALUES (#{id, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR},
-        #{tag, jdbcType=VARCHAR}, #{pre_article, jdbcType=VARCHAR}, #{createTime, jdbcType=BIGINT},
+        #{tag, jdbcType=VARCHAR}, #{preArticle, jdbcType=VARCHAR}, #{createTime, jdbcType=BIGINT},
         #{status, jdbcType=TINYINT})
     </insert>
 
@@ -42,7 +42,13 @@
         FROM `article`
         WHERE `username` = #{username, jdbcType=VARCHAR}
         AND `status` = #{status, jdbcType=TINYINT}
-        ORDER BY `create_time` limit 5;
+        <if test="lastDateTime != null">
+            AND `create_time` <![CDATA[ < ]]> #{lastDateTime, jdbcType=BIGINT}
+        </if>
+        <if test="lessDateTime != null">
+            AND `create_time` <![CDATA[ >= ]]> #{lessDateTime, jdbcType=BIGINT}
+        </if>
+        ORDER BY `create_time` DESC limit 5;
     </select>
 
 

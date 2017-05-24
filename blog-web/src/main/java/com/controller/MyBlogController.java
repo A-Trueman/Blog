@@ -3,6 +3,7 @@ package com.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.bo.Article;
 import com.common.SystemConst;
+import com.common.util.BeanConvertor;
 import com.common.util.BlogUtils;
 import com.common.util.SFTPUtil;
 import com.jcraft.jsch.Channel;
@@ -10,19 +11,18 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.Session;
 import com.service.ArticleService;
 import org.apache.commons.io.FileUtils;
-import org.aspectj.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
+import java.util.List;
 
 /**
  * Created by Lincg on 2017/5/19.
@@ -41,13 +41,25 @@ public class MyBlogController {
 
 
     @RequestMapping(value = "/myBlogList.html",method = RequestMethod.GET)
-    public String getMyBlog(HttpSession session, HttpServletRequest request) {
+    public ModelAndView getMyBlog(HttpSession session, HttpServletRequest request) {
 
+        ModelAndView modelAndView = new ModelAndView();
         String username = (String) session.getAttribute("username");
         String lastDateTime = request.getParameter("lastDateTime");
         String lessDateTime = request.getParameter("lessDateTime");
+        List<Article> articles = articleService.getUserArticleList(username, lastDateTime, lessDateTime);
+        modelAndView.setViewName("/myBlogList");
 
-        return "myBlogList";
+        modelAndView.addObject("lessDateTime", lastDateTime);
+        if (articles != null && !articles.isEmpty() && (articles.size() > SystemConst.PAGESIZE)) {
+            articles.remove(articles.size() - 1);
+            modelAndView.addObject("lastDateTime", articles.get(articles.size() - 1).getCreateTime());
+        } else {
+            modelAndView.addObject("lastDateTime", null);
+        }
+        modelAndView.addObject("articles",
+                               BeanConvertor.convert2ArticleVos(articles));
+        return modelAndView;
     }
 
 

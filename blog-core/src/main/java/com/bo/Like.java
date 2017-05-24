@@ -7,52 +7,52 @@ import java.io.Serializable;
  */
 public class Like implements Serializable{
     //收藏id
-    public String id;
+    private String id;
 
     //博文id
-    public String articleId;
+    private String articleId;
 
     //标题
-    public String title;
+    private String title;
 
     //用户id
-    public String userId;
+    private String userId;
 
     //用户名
-    public String username;
+    private String username;
 
     //作者id
-    public String author_id;
+    private String author_id;
 
     //作者名
-    public String author_name;
+    private String author_name;
 
     //标签
-    public String tag;
+    private String tag;
 
     //博文存储url
-    public String url;
+    private String url;
 
     //博文预览
-    public String preArticle;
+    private String preArticle;
 
     //收藏时间
-    public Long createTime;
+    private Long createTime;
 
     //博文创建时间
-    public Long articleCreateTime;
+    private Long articleCreateTime;
 
     //阅读数量
-    public Integer readCounts;
+    private Integer readCounts;
 
     //收藏数量
-    public Integer likes;
+    private Integer likes;
 
     //评论数量
-    public Integer comments;
+    private Integer comments;
 
     //状态
-    public Byte status;
+    private Byte status;
 
     public Like() {}
 

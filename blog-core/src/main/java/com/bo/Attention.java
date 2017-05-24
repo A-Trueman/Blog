@@ -8,22 +8,22 @@ import java.io.Serializable;
 public class Attention implements Serializable{
 
     //ID
-    public String id;
+    private String id;
 
     //用户名
-    public String username;
+    private String username;
 
     //用户ID
-    public String userId;
+    private String userId;
 
     //关注人名称
-    public String authorName;
+    private String authorName;
 
     //关注人ID
-    public String authorId;
+    private String authorId;
 
     //关注时间
-    public Long createTime;
+    private Long createTime;
 
     public Attention() {}
 

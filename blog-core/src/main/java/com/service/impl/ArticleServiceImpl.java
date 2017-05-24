@@ -24,7 +24,8 @@ public class ArticleServiceImpl implements ArticleService{
 		return articleDao.insertArticle(article);
 	}
 
-	public List<Article> getArticleList(String username, String lastDateTime, String lessDateTime) {
+
+	public List<Article> getUserArticleList(String username, String lastDateTime, String lessDateTime) {
 
 		Long lastTime = null, lessTime = null;
 
@@ -35,8 +36,7 @@ public class ArticleServiceImpl implements ArticleService{
 			lessTime = Long.parseLong(lessDateTime);
 		}
 
-		articleDao.selectUserArticle(username, lastTime, lessTime, Byte.valueOf("1"));
-		return null;
+		return articleDao.selectUserArticle(username, lastTime, lessTime, Byte.valueOf("1"));
 	}
 
 
