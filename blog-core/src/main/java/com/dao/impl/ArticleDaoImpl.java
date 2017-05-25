@@ -36,6 +36,18 @@ public class ArticleDaoImpl implements ArticleDao{
 
 
 	/**
+	 * 查找博文
+	 *
+	 * @param articleId 博文id
+	 *
+	 * @return 博文
+	 */
+	public Article selectArticleById(String articleId) {
+		return articleMapper.selectArticleById(articleId);
+	}
+
+
+	/**
 	 * 查找用户博文（分页）
 	 *
 	 * @param username 用户名

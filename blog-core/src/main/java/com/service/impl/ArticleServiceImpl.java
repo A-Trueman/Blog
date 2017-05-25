@@ -24,8 +24,17 @@ public class ArticleServiceImpl implements ArticleService{
 		return articleDao.insertArticle(article);
 	}
 
-
-	public List<Article> getUserArticleList(String username, String lastDateTime, String lessDateTime) {
+	/**
+	 * 查找用户博文（分页）
+	 *
+	 * @param username 用户名
+	 * @param lastDateTime 截止时间
+	 * @param lessDateTime 起始时间
+	 * @param status 1：public，2：private
+	 *
+	 * @return 博文
+	 */
+	public List<Article> getUserArticleList(String username, String lastDateTime, String lessDateTime, Byte status) {
 
 		Long lastTime = null, lessTime = null;
 
@@ -36,8 +45,18 @@ public class ArticleServiceImpl implements ArticleService{
 			lessTime = Long.parseLong(lessDateTime);
 		}
 
-		return articleDao.selectUserArticle(username, lastTime, lessTime, Byte.valueOf("1"));
+		return articleDao.selectUserArticle(username, lastTime, lessTime, status);
 	}
 
 
+	/**
+	 * 查找博文
+	 *
+	 * @param articleId 博文id
+	 *
+	 * @return 博文
+	 */
+	public Article selectArticleById(String articleId) {
+		return articleDao.selectArticleById(articleId);
+	}
 }

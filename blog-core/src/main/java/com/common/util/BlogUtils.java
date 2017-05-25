@@ -4,6 +4,8 @@ package com.common.util;
 
 import org.apache.commons.lang3.SystemUtils;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
@@ -63,11 +65,17 @@ public final class BlogUtils {
         return string;
     }
 
-    public static void main(String agrs[]) {
-    	String str = longTime2Text(System.currentTimeMillis());
-    	String[] string = str.split(" ");
-    	for (String s : string) {
-    		System.out.println(s);
+    public static String getLocalHostIp() {
+    	String ip = null;
+    	try {
+		    InetAddress address = InetAddress.getLocalHost();
+		    ip = address.getHostAddress();
+	    } catch (UnknownHostException e) {
+		    e.printStackTrace();
 	    }
+	    return ip;
+    }
+    public static void main(String agrs[]) {
+    	System.out.println(getLocalHostIp());
     }
 }

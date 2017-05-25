@@ -28,11 +28,14 @@ public class ArticleVo implements Serializable{
 	//预览
 	private String preArticle;
 
-	//正文地址
+	//正文跳转地址
 	private String articleUrl;
 
+	//正文实际地址
+	private String articleRealUrl;
+
 	//阅读数量
-	public int readCounts;
+	private int readCounts;
 
 	public ArticleVo() {}
 
@@ -44,6 +47,7 @@ public class ArticleVo implements Serializable{
 	                 String createTime,
 	                 String preArticle,
 	                 String articleUrl,
+	                 String articleRealUrl,
 	                 int readCounts) {
 		this.username = username;
 		this.usernameUrl = usernameUrl;
@@ -53,6 +57,7 @@ public class ArticleVo implements Serializable{
 		this.createTime = createTime;
 		this.preArticle = preArticle;
 		this.articleUrl = articleUrl;
+		this.articleRealUrl = articleRealUrl;
 		this.readCounts = readCounts;
 	}
 
@@ -118,6 +123,14 @@ public class ArticleVo implements Serializable{
 
 	public void setArticleUrl(String articleUrl) {
 		this.articleUrl = articleUrl;
+	}
+
+	public String getArticleRealUrl() {
+		return articleRealUrl;
+	}
+
+	public void setArticleRealUrl(String articleRealUrl) {
+		this.articleRealUrl = articleRealUrl;
 	}
 
 	public int getReadCounts() {

@@ -59,12 +59,28 @@
 <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav">
-            <a class="blog-nav-item" href="#">首页</a>
+            <a class="blog-nav-item" href="index.html">首页</a>
             <a class="blog-nav-item" href="#">关注</a>
             <a class="blog-nav-item" href="#">全站</a>
             <a class="blog-nav-item" href="#">收藏</a>
-            <a class="blog-nav-item active" href="#">我的博客</a>
-            <a class="blog-nav-item right" href="#">用户名</a>
+            <a class="blog-nav-item active" href="myBlog.html">我的博客</a>
+            <c:if test="${username != null}">
+                <li class="dropdown blog-nav-item right">
+                    <a class="dropdown-toggle" data-toggle="dropdown">${username}</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">设置</a>
+                        </li>
+                        <li>
+                            <a href="#">注销</a>
+                        </li>
+                    </ul>
+                </li>
+            </c:if>
+
+            <c:if test="${username == null}">
+                <a class="blog-nav-item right" href="#loginModal" data-toggle="modal" >未登录</a>
+            </c:if>
         </nav>
     </div>
 </div>

@@ -35,8 +35,11 @@ public class MyBlogController {
     private ArticleService articleService;
 
     @RequestMapping("/myBlog.html")
-    public String getBlog(HttpSession session){
-        return "/myBlog";
+    public ModelAndView getBlog(HttpSession session){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/myBlog");
+        modelAndView.addObject("username", session.getAttribute("username"));
+        return modelAndView;
     }
 
 
@@ -47,7 +50,7 @@ public class MyBlogController {
         String username = (String) session.getAttribute("username");
         String lastDateTime = request.getParameter("lastDateTime");
         String lessDateTime = request.getParameter("lessDateTime");
-        List<Article> articles = articleService.getUserArticleList(username, lastDateTime, lessDateTime);
+        List<Article> articles = articleService.getUserArticleList(username, lastDateTime, lessDateTime, Byte.valueOf("1"));
         modelAndView.setViewName("/myBlogList");
 
         modelAndView.addObject("lessDateTime", lastDateTime);
@@ -58,7 +61,7 @@ public class MyBlogController {
             modelAndView.addObject("lastDateTime", null);
         }
         modelAndView.addObject("articles",
-                               BeanConvertor.convert2ArticleVos(articles));
+                               BeanConvertor.convert2ArticleVos(articles, Byte.valueOf("1")));
         return modelAndView;
     }
 
@@ -83,34 +86,34 @@ public class MyBlogController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ChannelSftp sftp = null;
-        Session ftpSession = null;
-        try {
-            ftpSession = SFTPUtil.connect(SystemConst.HOST, null, SystemConst.USER, SystemConst.PASSWORD);
-            Channel channel = ftpSession.openChannel("sftp");
-            channel.connect();
-            sftp = (ChannelSftp) channel;
-            SFTPUtil.upload(SystemConst.TARGETPath + "/html", htmlFile, sftp);
-            SFTPUtil.upload(SystemConst.TARGETPath + "/markdown", sourceFile, sftp);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (sftp != null) {
-                sftp.disconnect();
+        if (!BlogUtils.getLocalHostIp().trim().equals("120.25.246.250")) {
+            ChannelSftp sftp = null;
+            Session ftpSession = null;
+            try {
+                ftpSession = SFTPUtil.connect(SystemConst.HOST, null, SystemConst.USER, SystemConst.PASSWORD);
+                Channel channel = ftpSession.openChannel("sftp");
+                channel.connect();
+                sftp = (ChannelSftp) channel;
+                SFTPUtil.upload(SystemConst.TARGETPATH + "/html", htmlFile, sftp);
+                SFTPUtil.upload(SystemConst.TARGETPATH + "/markdown", sourceFile, sftp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (sftp != null) {
+                    sftp.disconnect();
+                }
+                if (ftpSession != null) {
+                    ftpSession.disconnect();
+                }
             }
-            if (ftpSession != null) {
-                ftpSession.disconnect();
+            if (!htmlFile.delete()) {
+                System.out.println("删除html文件" + id + "失败");
+            }
+
+            if (!sourceFile.delete()) {
+                System.out.println("删除source文件"+ id +"失败");
             }
         }
-
-        if (!htmlFile.delete()) {
-            System.out.println("删除html文件" + id + "失败");
-        }
-
-        if (!sourceFile.delete()) {
-           System.out.println("删除source文件"+ id +"失败");
-        }
-
 
         Article article = new Article();
         article.setId(id);
@@ -124,5 +127,18 @@ public class MyBlogController {
         articleService.saveArticle(article);
         return "/writeBlog";
     }
+
+    @RequestMapping("/myArticle/*")
+    public ModelAndView getArticle(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        String url = request.getRequestURI();
+        String articleId = url.substring(url.lastIndexOf("/") + 1);
+        articleId = articleId.substring(0, articleId.length() - 1);
+        Article article = articleService.selectArticleById(articleId);
+        modelAndView.setViewName("/myArticle");
+        modelAndView.addObject("article", BeanConvertor.convert2ArticleVo(article, Byte.valueOf("1")));
+        return modelAndView;
+    }
+
 
 }

@@ -21,6 +21,16 @@ public interface ArticleMapper {
 
 
     /**
+     * 查找博文
+     *
+     * @param articleId 博文id
+     *
+     * @return 博文
+     */
+    Article selectArticleById(String articleId);
+
+
+    /**
      * 查找用户公开博文
      *
      * @param map 查询条件

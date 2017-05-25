@@ -140,7 +140,18 @@ h6, .h6 {
     color: #fff;
     text-decoration: none;
 }
+.blog-nav-item a {
+    color: #ededed;
+}
+.blog-nav-item a:hover,
+.blog-nav-item a:focus {
+    color: #fff;
+    text-decoration: none;
+}
 
+.dropdown-menu{
+    min-width: 80px;
+}
 a:focus {
     outline: 0px;
 }
@@ -489,33 +500,7 @@ a:focus {
 hr {
     margin: 10px 0;
 }
-/*
- * Footer
- */
 
-.blog-footer {
-    padding: 40px 0;
-    color: #999;
-    text-align: center;
-    background-color: #f9f9f9;
-    border-top: 1px solid #e5e5e5;
-}
-.blog-footer p:last-child {
-    margin-bottom: 0;
-}
-
-/*
- * iframe
- */
-iframe {
-    vertical-align: top;
-    overflow: hidden;
-    border: 0;
-}
-
-.content {
-    margin:5px;
-}
 /**
  修改bootstrap中分页的颜色
  */
@@ -576,4 +561,40 @@ hr {
     cursor: not-allowed;
     background-color: #f9f9f9;
     border-color: #DDDDDD;
+}
+/*
+ * Footer
+ */
+
+.blog-footer {
+    padding: 20px 0;
+    color: #fff;
+    text-align: center;
+    background-color: #e74f4d;
+    border-top: 1px solid #e5e5e5;
+}
+.blog-footer p:last-child {
+    margin-bottom: 0;
+}
+.blog-footer a {
+    color: #fff;
+}
+
+.blog-footer a:focus,
+.blog-footer a:visited,
+.blog-footer a:hover{
+    color: #fff;
+}
+
+/*
+ * iframe
+ */
+iframe {
+    vertical-align: top;
+    overflow: hidden;
+    border: 0;
+}
+
+.content {
+    margin:5px;
 }

@@ -1,13 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Lincg
-  Date: 2017/5/19
-  Time: 1:40
+  User: nuomifan
+  Date: 2017/5/25
+  Time: 16:02
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-    
+
 %>
 <html lang="zh-CN">
 <head>
@@ -39,45 +40,18 @@
 </head>
 <body>
 <div class="container">
-    <div class="mod-tab">
-        <div class="mod-tab-list">
-            <ul>
-                <li class="selected"><a href="myBlogList.html">我的文章</a></li><!--
-                 --><li><a href="myPrivateBlogList.html">私密文章</a></li>
-            </ul>
-        </div>
-    </div>
-
     <div class="row content">
         <div class="col-sm-8 blog-main">
-            <div class="blog-button">
-                <a href="/writeBlog.html" class="button-text">写日志</a>
+            <div class="blog-header">
+                <h1 class="blog-title">${article.title}</h1>
+                <p class="lead blog-description">${article.createTime} by <a>${article.username}</a></p>
             </div>
-            <c:forEach items="${articles}" var="article">
-                <div class="blog-post">
-                    <a class="blog-post-title" href= ${article.articleUrl}>${article.title}</a>
-                    <p>${article.preArticle}</p>
-                    <p class="blog-post-meta right">${article.createTime}&nbsp;&nbsp;by&nbsp;&nbsp;<a href= ${article.usernameUrl}>${article.username}</a>&nbsp;&nbsp; 阅读数量(${article.readCounts})</p>
-                    <p class="clear"></p>
-                    <hr>
-                </div>
-            </c:forEach>
 
-            <ul class="pagination">
-                <c:if test="${lessDateTime == null}">
-                    <li class="disabled"><a href="#">前一页</a></li>
-                </c:if>
-                <c:if test="${lessDateTime != null } ">
-                    <li><a href="#">前一页</a></li>
-                </c:if>
-                <li class="active"><a href="#">第一页</a></li>
-                <c:if test="${lastDateTime == null}">
-                    <li class="disabled"><a href="#">后一页</a></li>
-                </c:if>
-                <c:if test="${lastDateTime != null}">
-                    <li><a href="#">后一页</a></li>
-                </c:if>
-            </ul>
+            <c:import url="${article.articleRealUrl}"/>
+            <hr>
+            <div class="">
+
+            </div>
         </div>
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">

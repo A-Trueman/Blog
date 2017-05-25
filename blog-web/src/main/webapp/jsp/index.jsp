@@ -6,15 +6,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-    boolean isLogin = false;
-    String loginName = (String)session.getAttribute("username");
-    if (loginName != null && !"".equals(loginName)) {
-        isLogin = true;
-    }
-    request.setAttribute("isLogin", isLogin);
-    request.setAttribute("loginName", loginName);
-%>
+
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
@@ -65,22 +57,21 @@
             <a class="blog-nav-item" href="/allSite.html">全站</a>
             <a class="blog-nav-item" href="/like.html">收藏</a>
             <a class="blog-nav-item" href="/myBlog.html">我的博客</a>
-            <c:if test="${isLogin}">
-                <a class=" dropdown-toggle blog-nav-item right" id="dropdownMenu" data-toggle="dropdown">
-                    ${loginName}
-                </a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
-                    <li role="presentation" >
-                        <a role="menuitem" tabindex="-1" href="#">设置</a>
-                    </li>
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" href="#">注销</a>
-                    </li>
-                </ul>
-
+            <c:if test="${username != null}">
+                <li class="dropdown blog-nav-item right">
+                    <a class="dropdown-toggle" data-toggle="dropdown">${username}</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">设置</a>
+                        </li>
+                        <li>
+                            <a href="#">注销</a>
+                        </li>
+                    </ul>
+                </li>
             </c:if>
 
-            <c:if test="${!isLogin}">
+            <c:if test="${username == null}">
                 <a class="blog-nav-item right" href="#loginModal" data-toggle="modal" >未登录</a>
             </c:if>
         </nav>
@@ -135,60 +126,6 @@
                 <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
                 <hr>
             </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
         </div>
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
@@ -210,14 +147,19 @@
             <div class="sidebar-module">
                 <h4>Elsewhere</h4>
                 <ol class="list-unstyled">
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Facebook</a></li>
+                    <li><a href="https://github.com">GitHub</a></li>
+                    <li><a href="https://twitter.com/">Twitter</a></li>
+                    <li><a href="https://www.facebook.com/">Facebook</a></li>
                 </ol>
             </div>
         </div>
     </div>
 </div>
+
+<footer class="blog-footer">
+    <p>Copyright © 2016-2017 By Lin</p>
+    <p><a href="http://www.miitbeian.gov.cn/">浙ICP备17021798</a></p>
+</footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../dist/js/jquery-3.2.1.min.js"></script>

@@ -21,6 +21,16 @@ public interface ArticleDao {
 
 
 	/**
+	 * 查找博文
+	 *
+	 * @param articleId 博文id
+	 *
+	 * @return 博文
+	 */
+	Article selectArticleById(String articleId);
+
+
+	/**
 	 * 查找用户博文（分页）
 	 *
 	 * @param username 用户名

@@ -37,6 +37,13 @@
     </insert>
 
 
+    <select id="selectArticleById" parameterType="string" resultMap="BaseResultMap">
+        SELECT <include refid="Article_Column_List" />
+        FROM `article`
+        WHERE `id` = #{articleId, jdbcType=VARCHAR}
+    </select>
+
+
     <select id="selectUserArticle" resultMap="BaseResultMap" parameterType="map">
         SELECT <include refid="Article_Column_List" />
         FROM `article`
