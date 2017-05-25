@@ -30,7 +30,7 @@
 
 .btn-guanzhu:hover,
 .btn-guanzhu:focus,
-.btn-guanzhu.active,
+.btn-guanzhu:active,
 .btn-red:hover,
 .btn-red:focus {
     color: #fff;

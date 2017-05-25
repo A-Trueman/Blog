@@ -587,7 +587,21 @@ hr {
 
 .collect:hover::before,
 .collect.active::before {
-    color: #1dc400;
+    color: #e74f4d;
+}
+
+.bottom-bar {
+    height: 30px;
+    border-bottom: 1px solid #e7eaf1;
+    box-shadow: 0 1px 3px rgba(0, 37, 55, .05);
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.buttom-bar label {
+    margin-bottom: 0px;
+}
+code {
+    background-color: #ccc;
 }
 /*
  * Footer

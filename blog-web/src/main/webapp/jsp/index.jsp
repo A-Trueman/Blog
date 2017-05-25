@@ -189,6 +189,14 @@
             $(this).find('.close').css({'margin-left' : '-50%'});
         })*/
     });
+    $('.collect').click(function() {
+        if ($('.collect').hasClass('active')) {
+            $('.collect').removeClass('active');
+
+        } else {
+            $('.collect').addClass('active');
+        }
+    });
     $("#loginButton").click(function () {
         var jsonData = JSON.stringify($("#loginForm").serializeObject());
         $.ajax({
