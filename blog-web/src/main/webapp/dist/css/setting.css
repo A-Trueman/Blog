@@ -1,0 +1,135 @@
+.attention,
+.cancela {
+    margin-right: 5px;
+}
+
+.attention {
+    position: relative;
+    top: -1px;
+}
+
+.attention::before,
+.cancela::before {
+    content: "\e669";
+    color: #c71640;
+}
+
+.cancela::before {
+    content: "\e610";
+}
+
+.btn-guanzhu,
+.btn-guanzhu:focus,
+.btn-red,
+.btn-red:focus {
+    width: 100px;
+    height: 34px;
+    color: #c71640;
+    border-color: #c71640;
+}
+
+.btn-guanzhu:hover,
+.btn-guanzhu:focus,
+.btn-guanzhu.active,
+.btn-red:hover,
+.btn-red:focus {
+    color: #fff;
+    border-color: #c71640;
+    background: #c71640;
+}
+
+.btn-guanzhu:hover .attention::before,
+.btn-guanzhu:focus .attention::before,
+.cancela::before,
+.btn-guanzhu.active {
+    color: #fff;
+}
+
+.btn-red {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.container {
+    width: 970px;
+    min-height: 100vh;
+    background: #fff;
+    border-left: 1px solid #e7eaf1;
+    border-right: 1px solid #e7eaf1;
+    box-shadow: 0 1px 3px rgba(0, 37, 55, .05);
+}
+
+.title {
+    margin-bottom: 16px;
+    border-bottom: 1px #e1e4e8 solid;
+}
+
+.title p {
+    font-size: 24px;
+}
+
+.col-xs-8.col-sm-8.col-md-8.col-lg-8 {
+    box-sizing: border-box;
+    padding-right: 20px;
+}
+
+.col-xs-4.col-sm-4.col-md-4.col-lg-4 {
+    box-sizing: border-box;
+    padding-left: 80px;
+}
+
+.col-xs-4.col-sm-4.col-md-4.col-lg-4 h4 {
+    margin-top: 0;
+}
+
+.col-xs-4.col-sm-4.col-md-4.col-lg-4 .img {
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    background-image: url(../../img/avatar.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.file {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+    border: 1px solid #ddd;
+    /*background-color: #eff3f6;*/
+    /*background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);*/
+    border-radius: 4px;
+    padding: 4px 12px;
+    margin-top: 16px;
+    overflow: hidden;
+    color: #333;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.file:hover {
+    background-color: #e6ebf1;
+    background-image: -webkit-linear-gradient(270deg, #f0f3f6 0%, #e6ebf1 90%);
+    background-image: linear-gradient(-180deg, #f0f3f6 0%, #e6ebf1 90%);
+    border-color: rgba(27, 31, 35, 0.35);
+    text-decoration: none;
+    line-height: 20px;
+}
+
+.upload {
+    display: block;
+    margin-top: 16px;
+    margin-left: 60px;
+}

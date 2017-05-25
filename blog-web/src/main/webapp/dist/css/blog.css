@@ -562,18 +562,53 @@ hr {
     background-color: #f9f9f9;
     border-color: #DDDDDD;
 }
+/**
+ * 收藏
+ */
+@font-face {
+    font-family: 'iconfont';
+    /* project id 297072 */
+    src: url('http://at.alicdn.com/t/font_j9eawdajcahsemi.eot');
+    src: url('http://at.alicdn.com/t/font_j9eawdajcahsemi.eot?#iefix') format('embedded-opentype'), url('http://at.alicdn.com/t/font_j9eawdajcahsemi.woff') format('woff'), url('http://at.alicdn.com/t/font_j9eawdajcahsemi.ttf') format('truetype'), url('http://at.alicdn.com/t/font_j9eawdajcahsemi.svg#iconfont') format('svg');
+}
+
+.iconfont {
+    font-family: 'iconfont' !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    color: #b2bac2;
+    vertical-align: middle;
+}
+
+.collect::before {
+    content: "\e600";
+}
+
+.collect:hover::before,
+.collect.active::before {
+    color: #1dc400;
+}
 /*
  * Footer
  */
 
 .blog-footer {
-    padding: 20px 0;
+    padding: 10px 0;
     color: #fff;
     text-align: center;
     background-color: #e74f4d;
     border-top: 1px solid #e5e5e5;
 }
-.blog-footer p:last-child {
+.blog-footer pre {
+    padding: 0;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #fff;
+    background: #e74f4d;
+    border: none;
+}
+.blog-footer pre:last-child {
     margin-bottom: 0;
 }
 .blog-footer a {

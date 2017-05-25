@@ -157,8 +157,8 @@
 </div>
 
 <footer class="blog-footer">
-    <p>Copyright © 2016-2017 By Lin</p>
-    <p><a href="http://www.miitbeian.gov.cn/">浙ICP备17021798</a></p>
+    <pre>Copyright © 2016-2017 By Lin</pre>
+    <pre><a href="http://www.miitbeian.gov.cn/">浙ICP备17021798</a></pre>
 </footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
