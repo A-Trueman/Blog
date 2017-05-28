@@ -78,7 +78,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container minHeight">
     <c:if test="${!isLogin}">
         <!-- 模态框（Modal） -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -189,14 +189,7 @@
             $(this).find('.close').css({'margin-left' : '-50%'});
         })*/
     });
-    $('.collect').click(function() {
-        if ($('.collect').hasClass('active')) {
-            $('.collect').removeClass('active');
 
-        } else {
-            $('.collect').addClass('active');
-        }
-    });
     $("#loginButton").click(function () {
         var jsonData = JSON.stringify($("#loginForm").serializeObject());
         $.ajax({

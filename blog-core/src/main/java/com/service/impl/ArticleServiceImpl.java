@@ -21,7 +21,7 @@ public class ArticleServiceImpl implements ArticleService{
 	private ArticleDao articleDao;
 
 	public int saveArticle(Article article) {
-		return articleDao.insertArticle(article);
+		return articleDao.replaceArticle(article);
 	}
 
 	/**

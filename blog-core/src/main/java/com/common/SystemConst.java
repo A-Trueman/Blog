@@ -25,4 +25,6 @@ public final class SystemConst {
     public static final String TAG_BLOG_PATH = "/tag/";
 
     public static final String HTML_URL = "http://www.lincg.cn:8081/html/";
+
+    public static final String MARKDOWN_URL = "http://www.lincg.cn:8081/markdown/";
 }

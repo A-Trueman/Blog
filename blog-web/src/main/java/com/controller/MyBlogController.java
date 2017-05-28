@@ -11,6 +11,7 @@ import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.Session;
 import com.service.ArticleService;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
 
 /**
@@ -50,25 +55,78 @@ public class MyBlogController {
         String username = (String) session.getAttribute("username");
         String lastDateTime = request.getParameter("lastDateTime");
         String lessDateTime = request.getParameter("lessDateTime");
+        String pageCount = request.getParameter("pageCount");
         List<Article> articles = articleService.getUserArticleList(username, lastDateTime, lessDateTime, Byte.valueOf("1"));
         modelAndView.setViewName("/myBlogList");
-
-        modelAndView.addObject("lessDateTime", lastDateTime);
-        if (articles != null && !articles.isEmpty() && (articles.size() > SystemConst.PAGESIZE)) {
-            articles.remove(articles.size() - 1);
-            modelAndView.addObject("lastDateTime", articles.get(articles.size() - 1).getCreateTime());
+        if (pageCount == null || pageCount.isEmpty()) {
+            modelAndView.addObject("pageCount","1");
+            modelAndView.addObject("lessDateTime", null);
+            if (articles != null && !articles.isEmpty() && (articles.size() > SystemConst.PAGESIZE)) {
+                articles.remove(articles.size() - 1);
+                modelAndView.addObject("lastDateTime", articles.get(articles.size() - 1).getCreateTime());
+            } else {
+                modelAndView.addObject("lastDateTime", null);
+            }
         } else {
-            modelAndView.addObject("lastDateTime", null);
+            if (lastDateTime != null && !lastDateTime.isEmpty()) {
+                modelAndView.addObject("pageCount", Integer.parseInt(pageCount) + 1);
+                modelAndView.addObject("lessDateTime", lastDateTime);
+                if (articles != null && !articles.isEmpty() && (articles.size() > SystemConst.PAGESIZE)) {
+                    articles.remove(articles.size() - 1);
+                    modelAndView.addObject("lastDateTime", articles.get(articles.size() - 1).getCreateTime());
+                } else {
+                    modelAndView.addObject("lastDateTime", null);
+                }
+            } else if (lessDateTime != null && !lessDateTime.isEmpty()){
+                modelAndView.addObject("pageCount", Integer.parseInt(pageCount) - 1);
+                modelAndView.addObject("lastDateTime", lessDateTime);
+                if (articles != null && !articles.isEmpty() && (articles.size() > SystemConst.PAGESIZE)) {
+                    articles.remove(articles.size() - 1);
+                    modelAndView.addObject("lessDateTime", articles.get(articles.size() - 1).getCreateTime());
+                } else {
+                    modelAndView.addObject("lessDateTime", null);
+                }
+            }
         }
+
         modelAndView.addObject("articles",
                                BeanConvertor.convert2ArticleVos(articles, Byte.valueOf("1")));
+
+        //查找标签
+
         return modelAndView;
     }
 
 
     @RequestMapping(value = "/writeBlog.html", method = RequestMethod.GET)
-    public String writeBlog(HttpSession session) {
-        return "/writeBlog";
+    public ModelAndView writeBlog(HttpSession session, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/writeBlog");
+        String id = request.getParameter("id");
+        if (id != null && id.length() == 32) {
+            Article article = articleService.selectArticleById(id);
+            String initData = null;
+            InputStream inputStream = null;
+            try {
+                URL url = new URL(SystemConst.MARKDOWN_URL + id + ".txt");
+                URLConnection connection = url.openConnection();
+                inputStream = connection.getInputStream();
+                initData = IOUtils.toString(inputStream, "utf8");
+                modelAndView.addObject("initData", initData);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (inputStream != null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            modelAndView.addObject("article", article);
+        }
+        return modelAndView;
     }
 
     @RequestMapping(value = "/writeBlog.html", method = RequestMethod.POST)
@@ -77,7 +135,10 @@ public class MyBlogController {
         String markdown = data.getString("editormd-markdown-doc");
         String html = data.getString("editormd-html-code");
         String preHtml = BlogUtils.html2Text(html).substring(0,128);
-        String id = BlogUtils.getUUID();
+        String id = data.getString("id");
+        if (id == null || id.isEmpty()) {
+            id = BlogUtils.getUUID();
+        }
         File htmlFile = new File(SystemConst.PATH + "html" + File.separator + id + ".htm");
         File sourceFile = new File(SystemConst.PATH + "markdown" + File.separator + id + ".txt");
         try {
@@ -133,7 +194,7 @@ public class MyBlogController {
         ModelAndView modelAndView = new ModelAndView();
         String url = request.getRequestURI();
         String articleId = url.substring(url.lastIndexOf("/") + 1);
-        articleId = articleId.substring(0, articleId.length() - 1);
+        articleId = articleId.substring(0, articleId.length() - 5);
         Article article = articleService.selectArticleById(articleId);
         modelAndView.setViewName("/myArticle");
         modelAndView.addObject("article", BeanConvertor.convert2ArticleVo(article, Byte.valueOf("1")));

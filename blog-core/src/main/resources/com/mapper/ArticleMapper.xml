@@ -27,8 +27,8 @@
     </sql>
 
 
-    <insert id="insertArticle" parameterType="com.bo.Article">
-        INSERT INTO `article`(`id`, `title`, `username`,
+    <insert id="replaceArticle" parameterType="com.bo.Article">
+        replace INTO `article`(`id`, `title`, `username`,
         `tag`, `pre_article`, `create_time`,
         `status`)
         VALUES (#{id, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR},
@@ -89,6 +89,9 @@
         AND `status` = #{status, jdbcType=VARCHAR}
         ORDER BY `create_time` limit 10;
     </select>
+    
+    
+
 
 
 </mapper>

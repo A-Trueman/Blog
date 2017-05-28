@@ -36,7 +36,9 @@ h6, .h6 {
         width: 970px;
     }
 }
-
+.minHeight {
+    min-height: 800px;
+}
 .right{
     float: right;
 }
@@ -184,14 +186,15 @@ a:focus {
     padding-bottom: 20px;
 }
 .blog-title {
-    margin-top: 30px;
-    margin-bottom: 0;
-    font-size: 60px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 48px;
     font-weight: normal;
 }
 .blog-description {
-    font-size: 20px;
+    font-size: 16px;
     color: #999;
+    margin-bottom: 10px;
 }
 
 
@@ -591,13 +594,11 @@ hr {
 }
 
 .bottom-bar {
-    height: 30px;
     border-bottom: 1px solid #e7eaf1;
     box-shadow: 0 1px 3px rgba(0, 37, 55, .05);
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: -6px;
 }
-.buttom-bar label {
+.bottom-bar label {
     margin-bottom: 0px;
 }
 code {
@@ -608,6 +609,7 @@ code {
  */
 
 .blog-footer {
+    margin-top: 30px;
     padding: 10px 0;
     color: #fff;
     text-align: center;

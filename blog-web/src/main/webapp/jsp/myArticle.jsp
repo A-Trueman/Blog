@@ -39,46 +39,27 @@
     <![endif]-->
 </head>
 <body>
-<div class="container">
+<div class="container minHeight">
     <div class="row content">
-        <div class="col-sm-8 blog-main">
-            <div class="blog-header">
-                <h1 class="blog-title">${article.title}</h1>
-                <p class="lead blog-description">${article.createTime} by <a>${article.username}</a></p>
-            </div>
-
+        <div class="col-sm-12 blog-main">
+            <h1 class="blog-title">${article.title}</h1>
+            <p class="lead blog-description">${article.createTime} by <a>${article.username}</a></p>
             <c:import url="${article.articleRealUrl}"/>
             <hr>
-            <div class="">
-
+            <div class="bottom-bar row">
+                <div class="col-sm-4">
+                    <label>标签：</label><code>${article.tag}</code>
+                </div>
+                <div class="col-sm-2 col-sm-offset-4">
+                    <a class="right" href="/writeBlog.html?id=${article.id}">编辑</a>
+                </div>
+                <div class="col-sm-2">
+                    <i class="iconfont collect right"></i><label class="right">收藏：</label>
+                </div>
             </div>
         </div>
 
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-            <div class="sidebar-module">
-                <h4>分类标签</h4>
-                <ol class="list-unstyled">
-                    <li><a href="#">JAVA</a></li>
-                    <li><a href="#">C++</a></li>
-                    <li><a href="#">JAVASCRIPT</a></li>
-                    <li><a href="#">C#</a></li>
-                    <li><a href="#">随笔</a></li>
-                    <li><a href="#">前端</a></li>
-                    <li><a href="#">手机开发</a></li>
-                    <li><a href="#">数据库</a></li>
-                    <li><a href="#">其他</a></li>
-                </ol>
-            </div>
 
-            <div class="sidebar-module">
-                <h4>Elsewhere</h4>
-                <ol class="list-unstyled">
-                    <li><a href="https://github.com">GitHub</a></li>
-                    <li><a href="https://twitter.com/">Twitter</a></li>
-                    <li><a href="https://www.facebook.com/">Facebook</a></li>
-                </ol>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -88,6 +69,14 @@
 <script src="../dist/js/bootstrap.min.js"></script>
 <script src="../dist/js/sweetalert.min.js"></script>
 <script>
+    $('.collect').click(function() {
+        if ($('.collect').hasClass('active')) {
+            $('.collect').removeClass('active');
+
+        } else {
+            $('.collect').addClass('active');
+        }
+    });
     window.onload = function(){
         var height = $(document).height() + 'px';
         var iframe = parent.document.getElementById('myBlog');

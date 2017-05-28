@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="row content">
+    <div class="row content minHeight">
         <div class="col-sm-8 blog-main">
             <div class="blog-button">
                 <a href="/writeBlog.html" class="button-text">写日志</a>
@@ -64,18 +64,24 @@
             </c:forEach>
 
             <ul class="pagination">
-                <c:if test="${lessDateTime == null}">
-                    <li class="disabled"><a href="#">前一页</a></li>
-                </c:if>
-                <c:if test="${lessDateTime != null } ">
-                    <li><a href="#">前一页</a></li>
-                </c:if>
-                <li class="active"><a href="#">第一页</a></li>
-                <c:if test="${lastDateTime == null}">
-                    <li class="disabled"><a href="#">后一页</a></li>
-                </c:if>
-                <c:if test="${lastDateTime != null}">
-                    <li><a href="#">后一页</a></li>
+                <c:if test="${not empty lessDateTime || not empty lastDateTime}">
+                    <c:choose>
+                        <c:when test="${empty lessDateTime}">
+                            <li class="disabled"><a href="#">前一页</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/myBlogList.html?lessDateTime=${lessDateTime}&pageCount=${pageCount}">前一页</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    <li class="active"><a href="#">第${pageCount}页</a></li>
+                    <c:choose>
+                        <c:when test="${empty lastDateTime}">
+                            <li class="disabled"><a href="#">后一页</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/myBlogList.html?lastDateTime=${lastDateTime}&pageCount=${pageCount}">后一页</a></li>
+                        </c:otherwise>
+                    </c:choose>
                 </c:if>
             </ul>
         </div>
@@ -84,6 +90,11 @@
             <div class="sidebar-module">
                 <h4>分类标签</h4>
                 <ol class="list-unstyled">
+                    <c:choose>
+                        <c:if test="${not empty tagVos}">
+
+                        </c:if>
+                    </c:choose>
                     <li><a href="#">JAVA</a></li>
                     <li><a href="#">C++</a></li>
                     <li><a href="#">JAVASCRIPT</a></li>

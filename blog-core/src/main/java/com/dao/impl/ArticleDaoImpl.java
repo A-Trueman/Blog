@@ -24,14 +24,14 @@ public class ArticleDaoImpl implements ArticleDao{
 
 
 	/**
-	 * 插入博文
+	 * 插入博文或更新
 	 *
 	 * @param article 博文
 	 *
 	 * @return 是否插入成功
 	 */
-	public int insertArticle(Article article) {
-		return articleMapper.insertArticle(article);
+	public int replaceArticle(Article article) {
+		return articleMapper.replaceArticle(article);
 	}
 
 
@@ -64,8 +64,8 @@ public class ArticleDaoImpl implements ArticleDao{
 
 		Map<String, Object> cond = new HashMap<>();
 		cond.put("username", username);
-		cond.put("lastDataTime", lastDateTime);
-		cond.put("lessDataTime", lessDateTime);
+		cond.put("lastDateTime", lastDateTime);
+		cond.put("lessDateTime", lessDateTime);
 		cond.put("status", status);
 
 		return articleMapper.selectUserArticle(cond);

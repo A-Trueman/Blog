@@ -14,6 +14,7 @@ public class BeanConvertor {
 
 	public static ArticleVo convert2ArticleVo(Article article,Byte type) {
 		ArticleVo articleVo = new ArticleVo();
+		articleVo.setId(article.getId());
 		articleVo.setTitle(article.getTitle());
 		articleVo.setUsername(article.getUsername());
 		articleVo.setUsernameUrl(SystemConst.USER_BLOG_PATH + article.getUsername());

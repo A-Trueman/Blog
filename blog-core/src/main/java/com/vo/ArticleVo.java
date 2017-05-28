@@ -7,6 +7,9 @@ import java.io.Serializable;
  */
 public class ArticleVo implements Serializable{
 
+	//博文id
+	private String id;
+
 	//用户名
 	private String username;
 
@@ -39,16 +42,18 @@ public class ArticleVo implements Serializable{
 
 	public ArticleVo() {}
 
-	public ArticleVo(String username,
-	                 String usernameUrl,
-	                 String title,
-	                 String tag,
-	                 String tagUrl,
-	                 String createTime,
-	                 String preArticle,
-	                 String articleUrl,
-	                 String articleRealUrl,
-	                 int readCounts) {
+	public ArticleVo(String id,
+					 String username,
+					 String usernameUrl,
+					 String title,
+					 String tag,
+					 String tagUrl,
+					 String createTime,
+					 String preArticle,
+					 String articleUrl,
+					 String articleRealUrl,
+					 int readCounts) {
+		this.id = id;
 		this.username = username;
 		this.usernameUrl = usernameUrl;
 		this.title = title;
@@ -59,6 +64,15 @@ public class ArticleVo implements Serializable{
 		this.articleUrl = articleUrl;
 		this.articleRealUrl = articleRealUrl;
 		this.readCounts = readCounts;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getUsername() {

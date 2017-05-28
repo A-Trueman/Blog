@@ -5,6 +5,7 @@
   Time: 1:41
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
@@ -27,27 +28,63 @@
     <![endif]-->
 </head>
 <body>
-<div class="container">
+<div class="container minHeight">
     <div class="form blog-form">
         <form method="post" id="blogForm">
             <div class="write-blog-status">
                 <label for="status">权限：</label>
-                <select id="status" name="status">
-                    <option value="1">公开</option>
-                    <option value="2">私密</option>
-                </select>
+                <c:choose>
+                    <c:when test="${not empty article.status}">
+                        <c:choose>
+                            <c:when test="${article.status == 1}">
+                                <select id="status" name="status">
+                                    <option value="1" selected>公开</option>
+                                    <option value="2">私密</option>
+                                </select>
+                            </c:when>
+                            <c:otherwise>
+                                <select id="status" name="status">
+                                    <option value="1">公开</option>
+                                    <option value="2" selected>私密</option>
+                                </select>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <select id="status" name="status">
+                            <option value="1" selected>公开</option>
+                            <option value="2">私密</option>
+                        </select>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="write-blog-tag">
                 <label for="tag">标签：</label>
-                <input type="text" id="tag" name="tag" >
+                <c:choose>
+                    <c:when test="${not empty article.tag}">
+                        <input type="text" id="tag" name="tag" value="${article.tag}" >
+                    </c:when>
+                    <c:otherwise>
+                        <input type="text" id="tag" name="tag">
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="write-blog-title">
                 <label for="title">标题：</label>
-                <input type="text" id="title" name="title" required >
+                <c:choose>
+                    <c:when test="${not empty article.title}">
+                        <input type="text" id="title" name="title" value="${article.title}" required >
+                    </c:when>
+                    <c:otherwise>
+                        <input type="text" id="title" name="title" required >
+                    </c:otherwise>
+                </c:choose>
             </div>
-
+            <c:if test="${not empty article.id}">
+                <input type="text" name="id" value="${article.id}" style="display: none">
+            </c:if>
             <div class="editormd" id="editormd">
-                <textarea class="editormd-markdown-textarea" name="editormd-markdown-doc"></textarea>
+                <textarea class="editormd-markdown-textarea" name="editormd-markdown-doc"><c:if test="${not empty initData}">${initData}</c:if></textarea>
             </div>
         </form>
     </div>

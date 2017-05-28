@@ -87,7 +87,10 @@
 
 
 <iframe src="/myBlogList.html" scrolling="no" name="myBlog" allowtransparency="yes" id = "myBlog" frameborder="no" width="100%"></iframe>
-
+<footer class="blog-footer">
+    <pre>Copyright © 2016-2017 By Lin</pre>
+    <pre><a href="http://www.miitbeian.gov.cn/">浙ICP备17021798</a></pre>
+</footer>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../dist/js/jquery-3.2.1.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

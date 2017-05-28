@@ -11,13 +11,13 @@ import java.util.Map;
 public interface ArticleMapper {
 
     /**
-     * 插入博文
+     * 插入或更新博文
      *
      * @param article 博文
      *
      * @return 是否插入成功
      */
-    int insertArticle(Article article);
+    int replaceArticle(Article article);
 
 
     /**

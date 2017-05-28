@@ -11,13 +11,13 @@ public interface ArticleDao {
 
 
 	/**
-	 * 插入博文
+	 * 插入博文或更新
 	 *
 	 * @param article 博文
 	 *
 	 * @return 是否插入成功
 	 */
-	int insertArticle(Article article);
+	int replaceArticle(Article article);
 
 
 	/**
