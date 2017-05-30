@@ -1,13 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: Lincg
-  Date: 2017/5/14
-  Time: 1:45
+  Date: 2017/5/28
+  Time: 18:02
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,9 +24,8 @@
     <link href="../dist/css/user_form.css" rel="stylesheet">
     <!-- Blog.css -->
     <link href="../dist/css/blog.css" rel="stylesheet">
-
-    <!-- 弹出框 -->
     <link href="../dist/css/sweetalert.css" rel="stylesheet">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,15 +45,14 @@
             <input type="text" class="form-control" placeholder="Search" required>
         </form>
     </div>
-
 </div>
 
 <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav">
-            <a class="blog-nav-item active" href="/index.html">首页</a>
+            <a class="blog-nav-item" href="/index.html">首页</a>
             <a class="blog-nav-item" href="/attention.html">关注</a>
-            <a class="blog-nav-item" href="/allSite.html">全站</a>
+            <a class="blog-nav-item active" href="/allSite.html">全站</a>
             <a class="blog-nav-item" href="/like.html">收藏</a>
             <a class="blog-nav-item" href="/myBlog.html">我的博客</a>
             <c:choose>
@@ -79,7 +77,7 @@
     </div>
 </div>
 
-<div class="container minHeight">
+<div class="container">
     <c:if test="${empty username}">
         <!-- 模态框（Modal） -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -118,30 +116,55 @@
             </div>
         </div>
     </c:if>
-
-    <div class="row">
+    <div class="row minHeight">
         <div class="col-sm-8 blog-main">
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
+            <c:forEach items="${articles}" var="article">
+                <div class="blog-post">
+                    <a class="blog-post-title" href= ${article.articleUrl}>${article.title}</a>
+                    <p>${article.preArticle}</p>
+                    <p class="blog-post-meta right">${article.createTime}&nbsp;&nbsp;by&nbsp;&nbsp;<a href= ${article.usernameUrl}>${article.username}</a>&nbsp;&nbsp; 阅读数量(${article.readCounts})</p>
+                    <p class="clear"></p>
+                    <hr>
+                </div>
+            </c:forEach>
+
+            <ul class="pagination">
+                <c:if test="${not empty lessDateTime || not empty lastDateTime}">
+                    <c:choose>
+                        <c:when test="${empty lessDateTime}">
+                            <li class="disabled"><a href="#">前一页</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/allSite.html?lessDateTime=${lessDateTime}&pageCount=${pageCount}&tag=${tag}">前一页</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    <li class="active"><a href="#">第${pageCount}页</a></li>
+                    <c:choose>
+                        <c:when test="${empty lastDateTime}">
+                            <li class="disabled"><a href="#">后一页</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/allSite.html?lastDateTime=${lastDateTime}&pageCount=${pageCount}&tag=${tag}">后一页</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+            </ul>
         </div>
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
             <div class="sidebar-module">
                 <h4>分类标签</h4>
                 <ol class="list-unstyled">
-                    <li><a href="#">JAVA</a></li>
-                    <li><a href="#">C++</a></li>
-                    <li><a href="#">JAVASCRIPT</a></li>
-                    <li><a href="#">C#</a></li>
-                    <li><a href="#">随笔</a></li>
-                    <li><a href="#">前端</a></li>
-                    <li><a href="#">手机开发</a></li>
-                    <li><a href="#">数据库</a></li>
-                    <li><a href="#">其他</a></li>
+                    <c:choose>
+                        <c:when test="${not empty tags}">
+                            <c:forEach var="tag" items="${tags}">
+                                <li><a href="/allSite.html?tag=${tag}">${tag}</a></li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <li>无</li>
+                        </c:otherwise>
+                    </c:choose>
                 </ol>
             </div>
 
@@ -156,18 +179,15 @@
         </div>
     </div>
 </div>
-
 <footer class="blog-footer">
     <pre>Copyright © 2016-2017 By Lin</pre>
     <pre><a href="http://www.miitbeian.gov.cn/">浙ICP备17021798</a></pre>
 </footer>
-
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="../dist/js/jquery-3.2.1.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../dist/js/bootstrap.min.js"></script>
 <script src="../dist/js/sweetalert.min.js"></script>
-<script src="../dist/js/user.js"></script>
 <script>
 
     $(".blog-nav a:not(:last-child)").click(function () {
@@ -192,7 +212,111 @@
         })*/
     });
 
+    $("#loginButton").click(function () {
+        var jsonData = JSON.stringify($("#loginForm").serializeObject());
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            url: '/user/login.html',
+            data: jsonData,
+            success: function () {
+                if (arguments.length > 1 && arguments[1] == 'success') {
+                    window.location.reload();
+                } else {
+                    swal({
+                        title: "登录失败",
+                        type: "error",
+                        timer: 2000,
+                        showConfirmButton: true
+                    });
+                }
 
+            }
+        })
+    });
+
+    $("#registerButton").click(function () {
+        var jsonData = JSON.stringify($("#registerForm").serializeObject()) ;
+        $.ajax({
+            type: 'POST',
+            dataType: "json",
+            contentType: 'application/json',
+            url: '/user/register.html',
+            data: jsonData,
+
+            success: function (data) {
+                if(data == 1) {
+
+                    swal({
+                        title: "注册成功",
+                        type: "success",
+                        timer: 3000,
+                        showConfirmButton: true
+                    });
+
+                    $('#loginModal').modal('hide');
+                    $(".form-change").trigger('click');
+                } else if(data == 2) {
+                    swal({
+                        title: "用户名重复",
+                        type: "error",
+                        timer: 2000,
+                        showConfirmButton: true
+                    });
+                } else {
+                    swal({
+                        title: "注册失败",
+                        type: "error",
+                        timer: 2000,
+                        showConfirmButton: true
+                    });
+                }
+
+
+
+            }
+        })
+    });
+
+    $("input[type=radio]").click(function(){
+        $("input[type=radio]").removeClass("checked").removeAttr("checked");
+        $(this).toggleClass("checked").attr("checked","checked");
+    });
+
+    $(".form-change").click(function(){
+        $(".form-container").toggleClass("changed");
+        if($(this).text()=="Register"){
+            $(this).text("Login");
+        }else{
+            $(this).text("Register");
+        }
+    });
+
+    $.fn.serializeObject = function(){
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function(){
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            }
+            else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+    function checkPassword(pwd,rpwd){
+        if(pwd.val()!=rpwd.val()){
+            alert("密码重新输入有误，请检查重试");
+            rpwd.val(null);
+            pwd.val(null);
+        }
+    }
 </script>
 </body>
 </html>
+

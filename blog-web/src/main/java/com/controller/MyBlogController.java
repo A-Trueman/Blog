@@ -28,6 +28,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Lincg on 2017/5/19.
@@ -56,7 +57,18 @@ public class MyBlogController {
         String lastDateTime = request.getParameter("lastDateTime");
         String lessDateTime = request.getParameter("lessDateTime");
         String pageCount = request.getParameter("pageCount");
-        List<Article> articles = articleService.getUserArticleList(username, lastDateTime, lessDateTime, Byte.valueOf("1"));
+        String status = request.getParameter("status");
+        String tag = request.getParameter("tag");
+        if (status == null || status.isEmpty()) {
+            status = "1";
+        }
+        List<Article> articles;
+        if (tag == null || tag.isEmpty()) {
+            articles = articleService.getUserArticleList(username, lastDateTime, lessDateTime, Byte.parseByte(status));
+        } else {
+            articles = articleService.getUserTagArticleList(username, tag, lastDateTime, lessDateTime, Byte.parseByte(status));
+        }
+        modelAndView.addObject("tag", tag);
         modelAndView.setViewName("/myBlogList");
         if (pageCount == null || pageCount.isEmpty()) {
             modelAndView.addObject("pageCount","1");
@@ -90,10 +102,12 @@ public class MyBlogController {
         }
 
         modelAndView.addObject("articles",
-                               BeanConvertor.convert2ArticleVos(articles, Byte.valueOf("1")));
+                               BeanConvertor.convert2ArticleVos(articles, Byte.parseByte(status)));
 
         //查找标签
-
+        List<Map<String, Object>> tagVos = articleService.selectTagsByUsername(username, Byte.parseByte(status));
+        modelAndView.addObject("tagVos", tagVos);
+        modelAndView.addObject("status", status);
         return modelAndView;
     }
 
@@ -192,12 +206,33 @@ public class MyBlogController {
     @RequestMapping("/myArticle/*")
     public ModelAndView getArticle(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        String url = request.getRequestURI();
-        String articleId = url.substring(url.lastIndexOf("/") + 1);
+        String uri = request.getRequestURI();
+        String articleId = uri.substring(uri.lastIndexOf("/") + 1);
         articleId = articleId.substring(0, articleId.length() - 5);
         Article article = articleService.selectArticleById(articleId);
         modelAndView.setViewName("/myArticle");
         modelAndView.addObject("article", BeanConvertor.convert2ArticleVo(article, Byte.valueOf("1")));
+        String initData = null;
+        InputStream inputStream = null;
+        try {
+            URL url = new URL(SystemConst.MARKDOWN_URL + articleId + ".txt");
+            URLConnection connection = url.openConnection();
+            inputStream = connection.getInputStream();
+            initData = IOUtils.toString(inputStream, "utf8");
+            modelAndView.addObject("initData", initData);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        modelAndView.addObject("initData", initData);
+
         return modelAndView;
     }
 

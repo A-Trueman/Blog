@@ -31,7 +31,7 @@ public interface ArticleMapper {
 
 
     /**
-     * 查找用户公开博文
+     * 查找用户博文
      *
      * @param map 查询条件
      *
@@ -70,4 +70,32 @@ public interface ArticleMapper {
      */
     List<Article> selectUsersArticle(Map<String, Object> map);
 
+
+    /**
+     * 查找重复次数最多的标签
+     *
+     * @param map 查询条件
+     *
+     * @return 标签列表
+     */
+    List<Map<String, Object>> selectTagsByUsername(Map<String, Object> map);
+
+
+    /**
+     * 获得博文列表
+     *
+     * @param map 查询条件
+     *
+     * @return 博文列表
+     */
+    List<Article> selectArticleList(Map<String, Object> map);
+
+    /**
+     * 获得标签列表
+     *
+     * @param status 状态
+     *
+     * @return 标签
+     */
+    List<String> selectTags(Byte status);
 }

@@ -15,7 +15,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String requestURI = httpServletRequest.getRequestURI();
-        String[] allowPath = {"/index", "/blog/", "/user/"};
+        String[] allowPath = {"/index", "/blog/", "/user/", "/article/", "/allSite"};
         for (String path : allowPath) {
             if (requestURI.contains(path)) {
                 return true;

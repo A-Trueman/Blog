@@ -42,8 +42,16 @@
     <div class="mod-tab">
         <div class="mod-tab-list">
             <ul>
-                <li class="selected"><a href="myBlogList.html">我的文章</a></li><!--
-                 --><li><a href="myPrivateBlogList.html">私密文章</a></li>
+                <c:choose>
+                    <c:when test="${empty status || status == 1}">
+                        <li class="selected"><a href="myBlogList.html">我的文章</a></li><!--
+                        --><li><a href="myBlogList.html?status=2">私密文章</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="myBlogList.html">我的文章</a></li><!--
+                        --><li class="selected"><a href="myBlogList.html?status=2">私密文章</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </div>
@@ -70,7 +78,7 @@
                             <li class="disabled"><a href="#">前一页</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="/myBlogList.html?lessDateTime=${lessDateTime}&pageCount=${pageCount}">前一页</a></li>
+                            <li><a href="/myBlogList.html?lessDateTime=${lessDateTime}&pageCount=${pageCount}&status=${status}&tag=${tag}">前一页</a></li>
                         </c:otherwise>
                     </c:choose>
                     <li class="active"><a href="#">第${pageCount}页</a></li>
@@ -79,7 +87,7 @@
                             <li class="disabled"><a href="#">后一页</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="/myBlogList.html?lastDateTime=${lastDateTime}&pageCount=${pageCount}">后一页</a></li>
+                            <li><a href="/myBlogList.html?lastDateTime=${lastDateTime}&pageCount=${pageCount}&status=${status}&tag=${tag}">后一页</a></li>
                         </c:otherwise>
                     </c:choose>
                 </c:if>
@@ -91,19 +99,15 @@
                 <h4>分类标签</h4>
                 <ol class="list-unstyled">
                     <c:choose>
-                        <c:if test="${not empty tagVos}">
-
-                        </c:if>
+                        <c:when test="${not empty tagVos}">
+                            <c:forEach var="tag" items="${tagVos}">
+                                <li><a href="/myBlogList.html?tag=${tag.tag}&status=${status}">${tag.tag}(${tag.count})</a></li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <li>无</li>
+                        </c:otherwise>
                     </c:choose>
-                    <li><a href="#">JAVA</a></li>
-                    <li><a href="#">C++</a></li>
-                    <li><a href="#">JAVASCRIPT</a></li>
-                    <li><a href="#">C#</a></li>
-                    <li><a href="#">随笔</a></li>
-                    <li><a href="#">前端</a></li>
-                    <li><a href="#">手机开发</a></li>
-                    <li><a href="#">数据库</a></li>
-                    <li><a href="#">其他</a></li>
                 </ol>
             </div>
 

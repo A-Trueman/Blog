@@ -6,15 +6,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-    boolean isLogin = false;
-    String loginName = (String)session.getAttribute("username");
-    if (loginName != null && !"".equals(loginName)) {
-        isLogin = true;
-    }
-    request.setAttribute("isLogin", isLogin);
-    request.setAttribute("loginName", loginName);
-%>
 
 <html>
 <head>
@@ -59,28 +50,29 @@
 <div class="blog-masthead">
     <div class="container">
         <nav class="blog-nav">
-            <a class="blog-nav-item" href="index.html">首页</a>
-            <a class="blog-nav-item" href="#">关注</a>
-            <a class="blog-nav-item" href="#">全站</a>
-            <a class="blog-nav-item" href="#">收藏</a>
+            <a class="blog-nav-item" href="/index.html">首页</a>
+            <a class="blog-nav-item" href="/attention.html">关注</a>
+            <a class="blog-nav-item" href="/allSite.html">全站</a>
+            <a class="blog-nav-item" href="/like.html">收藏</a>
             <a class="blog-nav-item active" href="myBlog.html">我的博客</a>
-            <c:if test="${username != null}">
-                <li class="dropdown blog-nav-item right">
-                    <a class="dropdown-toggle" data-toggle="dropdown">${username}</a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">设置</a>
-                        </li>
-                        <li>
-                            <a href="#">注销</a>
-                        </li>
-                    </ul>
-                </li>
-            </c:if>
-
-            <c:if test="${username == null}">
-                <a class="blog-nav-item right" href="#loginModal" data-toggle="modal" >未登录</a>
-            </c:if>
+            <c:choose>
+                <c:when test="${not empty username}">
+                    <li class="dropdown blog-nav-item right">
+                        <a class="dropdown-toggle" data-toggle="dropdown">${username}</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">设置</a>
+                            </li>
+                            <li>
+                                <a href="#">注销</a>
+                            </li>
+                        </ul>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <a class="blog-nav-item right" href="#loginModal" data-toggle="modal" >未登录</a>
+                </c:otherwise>
+            </c:choose>
         </nav>
     </div>
 </div>
@@ -98,33 +90,3 @@
 <script src="../dist/js/sweetalert.min.js"></script>
 </body>
 </html>
-<script language="javascript">
-    function initIframeSize(){
-        var frameID = "frameID";
-        var bodyIFrame = document.getElementById(frameID);
-        var minLen = 550;
-        var height = -1;
-        try{
-            height = window.frames[frameID].document.body.scrollHeight;
-        }catch(e){
-            //可以兼容Firefox
-            height = bodyIFrame.contentDocument.body.scrollHeight;
-        }
-        if( height < minLen )height = minLen;
-        bodyIFrame.style.height = height + "px";
-    }
-    //下面为当前函数的变种：
-    function initIframeSize(frameID){
-        var bodyIFrame = document.getElementById(frameID);
-        var minLen = 550;
-        var height = -1;
-        try{
-            height = window.frames[frameID].document.body.scrollHeight;
-        }catch(e){
-            //可以兼容Firefox
-            height = bodyIFrame.contentDocument.body.scrollHeight + 20;
-        }
-        if( height < minLen )height = minLen;
-        bodyIFrame.style.height = height + "px";
-    }
-</script>

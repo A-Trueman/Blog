@@ -27,8 +27,14 @@
     <!-- Blog.css -->
     <link href="../dist/css/blog.css" rel="stylesheet">
     <link href="../dist/css/sweetalert.css" rel="stylesheet">
+    <link rel="stylesheet" href="../editor/css/editormd.preview.min.css">
+    <style>
+        .editormd-html-preview {
+            width: 100%;
+            margin: 0 auto;
+        }
 
-
+    </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -43,18 +49,18 @@
     <div class="row content">
         <div class="col-sm-12 blog-main">
             <h1 class="blog-title">${article.title}</h1>
-            <p class="lead blog-description">${article.createTime} by <a>${article.username}</a></p>
-            <c:import url="${article.articleRealUrl}"/>
-            <hr>
+            <p class="lead blog-description">${article.createTime}</p>
+
+            <div id="test-editormd-view">
+                <textarea id="append-test" style="display:none;"><c:if test="${not empty initData}">${initData}</c:if></textarea>
+            </div>
             <div class="bottom-bar row">
+                <hr>
                 <div class="col-sm-4">
                     <label>标签：</label><code>${article.tag}</code>
                 </div>
-                <div class="col-sm-2 col-sm-offset-4">
+                <div class="col-sm-2 col-sm-offset-6">
                     <a class="right" href="/writeBlog.html?id=${article.id}">编辑</a>
-                </div>
-                <div class="col-sm-2">
-                    <i class="iconfont collect right"></i><label class="right">收藏：</label>
                 </div>
             </div>
         </div>
@@ -68,16 +74,26 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../dist/js/bootstrap.min.js"></script>
 <script src="../dist/js/sweetalert.min.js"></script>
+<script src="../editor/lib/marked.min.js"></script>
+<script src="../editor/lib/prettify.min.js"></script>
+<script src="../editor/lib/raphael.min.js"></script>
+<script src="../editor/lib/underscore.min.js"></script>
+<script src="../editor/lib/sequence-diagram.min.js"></script>
+<script src="../editor/lib/flowchart.min.js"></script>
+<script src="../editor/lib/jquery.flowchart.min.js"></script>
+<script src="../editor/editormd.min.js"></script>
 <script>
-    $('.collect').click(function() {
-        if ($('.collect').hasClass('active')) {
-            $('.collect').removeClass('active');
 
-        } else {
-            $('.collect').addClass('active');
-        }
-    });
     window.onload = function(){
+        var testEditormdView;
+        testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+            htmlDecode      : "style,script,iframe",  // you can filter tags decode
+            emoji           : true,
+            taskList        : true,
+            tex             : true,  // 默认不解析
+            flowChart       : true,  // 默认不解析
+            sequenceDiagram : true   // 默认不解析
+        });
         var height = $(document).height() + 'px';
         var iframe = parent.document.getElementById('myBlog');
         iframe.style.height = height;

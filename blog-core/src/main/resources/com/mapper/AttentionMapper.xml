@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.AttentionMapper">
+    <resultMap id="BaseResultMap" type="com.bo.Attention">
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="author_name" property="authorName" jdbcType="VARCHAR" />
+        <result column="author_id" property="authorId" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    </resultMap>
+
+    <sql id="Attention_Column_List">
+        `id`, `username`, `author_name`,
+        `create_time`
+    </sql>
+
+    <insert id="replaceAttention" parameterType="com.bo.Attention">
+        replace INTO `attention`
+        (`id`, `username`, `author_name`, `create_time`)
+        VALUES (#{id, jdbcType=VARCHAR}, #{username, jdbcType=VARCHAR}, #{authorName, jdbcType=VARCHAR},#{createTime, jdbcType=VARCHAR})
+    </insert>
+
+    <select id="isAttention" parameterType="map" resultType="int">
+        SELECT count(*)
+        FROM `attention`
+        WHERE `username` = #{username, jdbcType=VARCHAR}
+        AND `author_name` = #{authorName, jdbcType=VARCHAR}
+    </select>
+    
+    
+    <select id="selectFollowee" parameterType="string" resultType="java.lang.String">
+        SELECT `author_name`
+        FROM `attention`
+        WHERE `username` = #{username, jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteAttention" parameterType="map">
+        DELETE FROM `attention`
+        WHERE `username` = #{username, jdbcType=VARCHAR}
+        AND `author_name` = #{authorName, jdbcType=VARCHAR}
+    </delete>
+</mapper>

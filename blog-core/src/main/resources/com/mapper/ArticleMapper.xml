@@ -66,7 +66,13 @@
         WHERE `username` = #{username, jdbcType=VARCHAR}
         AND `tag` = #{tag, jdbcType=VARCHAR}
         AND `status` = #{status, jdbcType=TINYINT}
-        ORDER BY `create_time` limit 10;
+        <if test="lastDateTime != null">
+            AND `create_time` <![CDATA[ < ]]> #{lastDateTime, jdbcType=BIGINT}
+        </if>
+        <if test="lessDateTime != null">
+            AND `create_time` <![CDATA[ >= ]]> #{lessDateTime, jdbcType=BIGINT}
+        </if>
+        ORDER BY `create_time` DESC limit 5;
     </select>
 
 
@@ -75,7 +81,13 @@
         FROM `article`
         WHERE `tag` = #{tag, jdbcType=VARCHAR}
         AND `status` = #{status, jdbcType=TINYINT}
-        ORDER BY `create_time` limit 10;
+        <if test="lastDateTime != null">
+            AND `create_time` <![CDATA[ < ]]> #{lastDateTime, jdbcType=BIGINT}
+        </if>
+        <if test="lessDateTime != null">
+            AND `create_time` <![CDATA[ >= ]]> #{lessDateTime, jdbcType=BIGINT}
+        </if>
+        ORDER BY `create_time` DESC limit 5;
     </select>
 
 
@@ -86,12 +98,42 @@
         <foreach collection="usernames" item="item" index="index" open="(" separator="," close=")">
             #{item}
         </foreach>
-        AND `status` = #{status, jdbcType=VARCHAR}
-        ORDER BY `create_time` limit 10;
+        AND `status` = #{status, jdbcType=TINYINT}
+        ORDER BY `create_time` DESC limit 5;
     </select>
     
     
+    <select id="selectTagsByUsername" resultType="java.util.Map" parameterType="map">
+        SELECT `tag`, count(*) AS `count`
+        FROM `article`
+        WHERE `username`=#{username, jdbcType=VARCHAR}
+        AND `status` = #{status, jdbcType=TINYINT}
+        GROUP BY `tag`
+        ORDER BY `count` DESC LIMIT 10;
+    </select>
 
 
+    <select id="selectArticleList" resultMap="BaseResultMap" parameterType="map">
+        SELECT <include refid="Article_Column_List" />
+        FROM `article`
+        WHERE `status` = #{status, jdbcType=TINYINT}
+        <if test="lastDateTime != null">
+            AND `create_time` <![CDATA[ < ]]> #{lastDateTime, jdbcType=BIGINT}
+        </if>
+        <if test="lessDateTime != null">
+            AND `create_time` <![CDATA[ >= ]]> #{lessDateTime, jdbcType=BIGINT}
+        </if>
+        ORDER BY `create_time` DESC limit 5;
+    </select>
+
+
+    <select id="selectTags" resultType="java.lang.String" parameterType="java.lang.Byte">
+        SELECT `tag`
+        FROM (SELECT `tag`, count(*) AS `count`
+        FROM `article`
+        WHERE `status` = #{status, jdbcType=TINYINT}
+        GROUP BY `tag`
+        ORDER BY `count` DESC LIMIT 10) AS t;
+    </select>
 
 </mapper>

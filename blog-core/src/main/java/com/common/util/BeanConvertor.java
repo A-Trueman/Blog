@@ -1,6 +1,7 @@
 package com.common.util;
 
 import com.bo.Article;
+import com.bo.Like;
 import com.common.SystemConst;
 import com.vo.ArticleVo;
 
@@ -17,9 +18,9 @@ public class BeanConvertor {
 		articleVo.setId(article.getId());
 		articleVo.setTitle(article.getTitle());
 		articleVo.setUsername(article.getUsername());
-		articleVo.setUsernameUrl(SystemConst.USER_BLOG_PATH + article.getUsername());
-		//type 1:查看自己文章 0：查看他人文章
-		if (type == 1) {
+		articleVo.setUsernameUrl(SystemConst.USER_BLOG_PATH + article.getUsername() + ".html");
+		//type 1:查看自己公平文章 2:查看私密文章 0：查看他人文章
+		if (type == 1 || type == 2) {
 			articleVo.setArticleUrl(SystemConst.My_ARTICLE_PATH + article.getId() + ".html");
 		} else {
 			articleVo.setArticleUrl(SystemConst.OTHER_ARTICLE_PATH + article.getId() + ".html");
@@ -42,5 +43,21 @@ public class BeanConvertor {
 			articleVos.add(convert2ArticleVo(article, type));
 		}
 		return articleVos;
+	}
+
+
+	public static Like converArticle2Like(Article article) {
+		Like like = new Like();
+		like.setArticleId(article.getId());
+		like.setTitle(article.getTitle());
+		like.setAuthorId(article.getUserId());
+		like.setAuthorName(article.getUsername());
+		like.setTag(article.getTag());
+		like.setPreArticle(article.getPreArticle());
+		like.setArticleCreateTime(article.getCreateTime());
+		like.setReadCounts(article.getReadCounts());
+		like.setLikes(article.getLikes());
+		like.setComments(article.getComments());
+		return like;
 	}
 }

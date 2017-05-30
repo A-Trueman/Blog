@@ -22,10 +22,10 @@ public class Like implements Serializable{
     private String username;
 
     //作者id
-    private String author_id;
+    private String authorId;
 
     //作者名
-    private String author_name;
+    private String authorName;
 
     //标签
     private String tag;
@@ -61,8 +61,8 @@ public class Like implements Serializable{
                 String title,
                 String userId,
                 String username,
-                String author_id,
-                String author_name,
+                String authorId,
+                String authorName,
                 String tag,
                 String url,
                 String preArticle,
@@ -77,8 +77,8 @@ public class Like implements Serializable{
         this.title = title;
         this.userId = userId;
         this.username = username;
-        this.author_id = author_id;
-        this.author_name = author_name;
+        this.authorId = authorId;
+        this.authorName = authorName;
         this.tag = tag;
         this.url = url;
         this.preArticle = preArticle;
@@ -130,20 +130,20 @@ public class Like implements Serializable{
         this.username = username;
     }
 
-    public String getAuthor_id() {
-        return author_id;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor_id(String author_id) {
-        this.author_id = author_id;
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 
-    public String getAuthor_name() {
-        return author_name;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setAuthor_name(String author_name) {
-        this.author_name = author_name;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public String getTag() {

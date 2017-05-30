@@ -91,10 +91,11 @@ public class ArticleDaoImpl implements ArticleDao{
 	                                          Byte status) {
 
 		Map<String, Object> cond = new HashMap<>();
+
 		cond.put("username", username);
 		cond.put("tag", tag);
-		cond.put("lastDataTime", lastDateTime);
-		cond.put("lessDataTime", lessDateTime);
+		cond.put("lastDateTime", lastDateTime);
+		cond.put("lessDateTime", lessDateTime);
 		cond.put("status", status);
 
 		return articleMapper.selectUserTagArticle(cond);
@@ -118,8 +119,8 @@ public class ArticleDaoImpl implements ArticleDao{
 
 		Map<String, Object> cond = new HashMap<>();
 		cond.put("tag", tag);
-		cond.put("lastDataTime", lastDateTime);
-		cond.put("lessDataTime", lessDateTime);
+		cond.put("lastDateTime", lastDateTime);
+		cond.put("lessDateTime", lessDateTime);
 		cond.put("status", status);
 
 		return articleMapper.selectTagArticle(cond);
@@ -143,10 +144,62 @@ public class ArticleDaoImpl implements ArticleDao{
 
 		Map<String, Object> cond = new HashMap<>();
 		cond.put("usernames", usernames);
-		cond.put("lastDataTime", lastDateTime);
-		cond.put("lessDataTime", lessDateTime);
+		cond.put("lastDateTime", lastDateTime);
+		cond.put("lessDateTime", lessDateTime);
 		cond.put("status", status);
 
 		return articleMapper.selectUsersArticle(cond);
+	}
+
+
+	/**
+	 * 查找文章数量最多的标签
+	 *
+	 * @param username 用户名
+	 * @param status 文章状态
+	 *
+	 * @return 标签
+	 */
+	public List<Map<String, Object>> selectTagsByUsername(String username, Byte status) {
+		Map<String, Object> cond = new HashMap<>();
+
+		cond.put("username", username);
+		cond.put("status", status);
+
+		return articleMapper.selectTagsByUsername(cond);
+	}
+
+
+	/**
+	 * 获得博文列表
+	 *
+	 * @param lastDateTime 截止时间
+	 * @param lessDateTime 起始时间
+	 * @param status 状态
+	 *
+	 * @return 博文
+	 */
+	public List<Article> selectArticleList(Long lastDateTime,
+										   Long lessDateTime,
+										   Byte status) {
+		Map<String, Object> cond = new HashMap<>();
+
+		cond.put("lastDateTime", lastDateTime);
+		cond.put("lessDateTime", lessDateTime);
+		cond.put("status", status);
+
+		return articleMapper.selectArticleList(cond);
+	}
+
+
+	/**
+	 * 获得标签列表
+	 *
+	 * @param status 状态
+	 *
+	 * @return 标签
+	 */
+	public List<String> selectTags(Byte status) {
+		return articleMapper.selectTags(status);
 	}
 }
