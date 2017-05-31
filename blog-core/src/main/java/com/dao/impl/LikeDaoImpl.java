@@ -53,12 +53,40 @@ public class LikeDaoImpl implements LikeDao {
                                   Long lessDateTime,
                                   Byte status) {
         Map<String, Object> cond = new HashMap<>();
-        cond.put("username", lastDateTime);
+        cond.put("username", username);
         cond.put("lastDateTime", lastDateTime);
         cond.put("lessDateTime", lessDateTime);
         cond.put("status", status);
 
         return likeMapper.selectLikeList(cond);
+    }
+
+
+    /**
+     * 获取指定标签收藏列表
+     *
+     * @param username 用户名
+     * @param tag 标签
+     * @param lastDateTime 截止时间
+     * @param lessDateTime 起始时间
+     * @param status 状态
+     *
+     * @return 收藏列表
+     */
+    public List<Like> getLikeTagList(String username,
+                                     String tag,
+                                     Long lastDateTime,
+                                     Long lessDateTime,
+                                     Byte status) {
+        Map<String, Object> cond = new HashMap<>();
+
+        cond.put("username", username);
+        cond.put("tag", tag);
+        cond.put("lastDateTime", lastDateTime);
+        cond.put("lessDateTime", lessDateTime);
+        cond.put("status", status);
+
+        return likeMapper.selectLikeTagList(cond);
     }
 
 
@@ -89,5 +117,23 @@ public class LikeDaoImpl implements LikeDao {
         cond.put("articleId", articleId);
 
         return likeMapper.deleteLike(cond);
+    }
+
+
+    /**
+     * 查找标签
+     *
+     * @param username 用户名
+     * @param status 状态
+     *
+     * @return 标签
+     */
+    public List<String> selectTags(String username, Byte status) {
+        Map<String, Object> cond = new HashMap<>();
+
+        cond.put("username", username);
+        cond.put("status", status);
+
+        return likeMapper.selectTags(cond);
     }
 }

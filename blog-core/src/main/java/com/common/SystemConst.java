@@ -14,7 +14,7 @@ public final class SystemConst {
 
     public static final String PASSWORD = "1995lcg!";
 
-    public static final int PAGESIZE = 4;
+    public static final int PAGESIZE = 5;
 
     public static final String My_ARTICLE_PATH = "/myArticle/";
 

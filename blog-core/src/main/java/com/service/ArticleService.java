@@ -97,4 +97,20 @@ public interface ArticleService {
 	 * @return 标签
 	 */
 	List<String> getTags(Byte status);
+
+
+	/**
+	 * 查找用户们的博文列表
+	 *
+	 * @param usernames 用户名列表
+	 * @param lastDateTime 截止时间
+	 * @param lessDateTime 起始时间
+	 * @param status 状态
+	 *
+	 * @return 博文列表
+	 */
+	List<Article> getUsersArticles(List<String> usernames,
+	                               String lastDateTime,
+	                               String lessDateTime,
+	                               Byte status);
 }

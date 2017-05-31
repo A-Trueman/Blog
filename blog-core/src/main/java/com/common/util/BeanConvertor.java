@@ -37,6 +37,7 @@ public class BeanConvertor {
 		return articleVo;
 	}
 
+
 	public static List<ArticleVo> convert2ArticleVos(List<Article> articles,Byte type) {
 		List<ArticleVo> articleVos = new ArrayList<>();
 		for (Article article : articles) {
@@ -46,7 +47,7 @@ public class BeanConvertor {
 	}
 
 
-	public static Like converArticle2Like(Article article) {
+	public static Like convertArticle2Like(Article article) {
 		Like like = new Like();
 		like.setArticleId(article.getId());
 		like.setTitle(article.getTitle());
@@ -59,5 +60,34 @@ public class BeanConvertor {
 		like.setLikes(article.getLikes());
 		like.setComments(article.getComments());
 		return like;
+	}
+
+
+	public static ArticleVo convertLike2ArticleVo(Like like) {
+		ArticleVo articleVo = new ArticleVo();
+		articleVo.setId(like.getArticleId());
+		articleVo.setTitle(like.getTitle());
+		articleVo.setUsername(like.getAuthorName());
+		articleVo.setUsernameUrl(SystemConst.USER_BLOG_PATH + like.getAuthorName() + ".html");
+		articleVo.setArticleUrl(SystemConst.OTHER_ARTICLE_PATH + like.getArticleId() + ".html");
+		articleVo.setArticleRealUrl(SystemConst.HTML_URL + like.getArticleId() + ".htm");
+		articleVo.setCreateTime(BlogUtils.longTime2Text(like.getArticleCreateTime()));
+		if(like.getPreArticle().trim().length() == 128) {
+			articleVo.setPreArticle(like.getPreArticle() + "...");
+		} else {
+			articleVo.setPreArticle(like.getPreArticle());
+		}
+		articleVo.setTag(like.getTag());
+		articleVo.setReadCounts(like.getReadCounts());
+		return articleVo;
+	}
+
+
+	public static List<ArticleVo> convertLikes2ArticleVos(List<Like> likes) {
+		List<ArticleVo> articleVos = new ArrayList<>();
+		for (Like like : likes) {
+			articleVos.add(convertLike2ArticleVo(like));
+		}
+		return articleVos;
 	}
 }

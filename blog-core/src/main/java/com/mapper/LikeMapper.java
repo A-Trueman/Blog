@@ -32,6 +32,16 @@ public interface LikeMapper {
 
 
     /**
+     * 标签收藏列表
+     *
+     * @param map 查询条件
+     *
+     * @return 收藏列表
+     */
+    List<Like> selectLikeTagList(Map map);
+
+
+    /**
      * 保存收藏
      *
      * @param like 收藏信息
@@ -49,4 +59,14 @@ public interface LikeMapper {
      * @return 删除结果
      */
     int deleteLike(Map<String, Object> map);
+
+
+    /**
+     * 收藏标签
+     *
+     * @param map 查询条件
+     *
+     * @return 标签
+     */
+    List<String> selectTags(Map<String, Object> map);
 }

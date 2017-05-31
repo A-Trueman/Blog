@@ -50,4 +50,14 @@ public class LoginController {
     public int register(@RequestBody User user) {
         return userService.registerUser(user);
     }
+
+
+    @RequestMapping("/user/logout")
+    public ModelAndView logout(HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null && !username.isEmpty()) {
+            session.removeAttribute("username");
+        }
+        return new ModelAndView("redirect:/index");
+    }
 }

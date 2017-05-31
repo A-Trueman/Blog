@@ -64,7 +64,7 @@
                                 <a href="#">设置</a>
                             </li>
                             <li>
-                                <a href="#">注销</a>
+                                <a href="/user/logout.html">注销</a>
                             </li>
                         </ul>
                     </li>

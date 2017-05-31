@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Lincg on 2017/5/30.
  */
@@ -63,4 +65,15 @@ public class AttentionServiceImpl implements AttentionService{
         return attentionDao.deleteAttention(username, authorName);
     }
 
+
+    /**
+     * 查找Followee
+     *
+     * @param username 用户名
+     *
+     * @return Followee
+     */
+    public List<String> getFollowee(String username) {
+        return attentionDao.getFollowees(username);
+    }
 }

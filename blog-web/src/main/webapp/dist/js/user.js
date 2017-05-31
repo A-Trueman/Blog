@@ -1,6 +1,21 @@
 /**
  * Created by Lincg on 2017/5/30.
  */
+$(".blog-nav a:not(:last-child)").click(function () {
+    if (($(this).text() != "全站") && ($(this).text() != "首页")){
+        if($(".blog-nav a:last-child").text() == "未登录") {
+            swal({
+                title: "请先登录账号！",
+                type: "error",
+                timer: 3000,
+                showConfirmButton: true
+            });
+            return false;
+        } else {
+            return true;
+        }
+    }
+});
 
 $("#loginButton").click(function () {
     var jsonData = JSON.stringify($("#loginForm").serializeObject());

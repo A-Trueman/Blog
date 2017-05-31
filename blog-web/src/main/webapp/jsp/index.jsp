@@ -66,7 +66,7 @@
                                 <a href="#">设置</a>
                             </li>
                             <li>
-                                <a href="#">注销</a>
+                                <a href="/user/logout.html">注销</a>
                             </li>
                         </ul>
                     </li>
@@ -170,21 +170,6 @@
 <script src="../dist/js/user.js"></script>
 <script>
 
-    $(".blog-nav a:not(:last-child)").click(function () {
-        if (($(this).text() != "全站") && ($(this).text() != "首页")){
-            if($(".blog-nav a:last-child").text() == "未登录") {
-                swal({
-                    title: "请先登录账号！",
-                    type: "error",
-                    timer: 3000,
-                    showConfirmButton: true
-                });
-                return false;
-            } else {
-                return true;
-            }
-        }
-    });
     $(function(){
         /**
          $('#loginModal').on('show.bs.modal', function(){

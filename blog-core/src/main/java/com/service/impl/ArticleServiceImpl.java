@@ -156,4 +156,31 @@ public class ArticleServiceImpl implements ArticleService{
 	public List<String> getTags(Byte status) {
 		return articleDao.selectTags(status);
 	}
+
+
+	/**
+	 * 查找用户们的博文列表
+	 *
+	 * @param usernames 用户名列表
+	 * @param lastDateTime 截止时间
+	 * @param lessDateTime 起始时间
+	 * @param status 状态
+	 *
+	 * @return 博文列表
+	 */
+	public List<Article> getUsersArticles(List<String> usernames,
+	                                      String lastDateTime,
+	                                      String lessDateTime,
+	                                      Byte status) {
+		Long lastTime = null, lessTime = null;
+
+		if (lastDateTime != null && !lastDateTime.isEmpty()) {
+			lastTime = Long.parseLong(lastDateTime);
+		}
+		if (lessDateTime != null && !lessDateTime.isEmpty()) {
+			lessTime = Long.parseLong(lessDateTime);
+		}
+
+		return articleDao.selectUsersArticle(usernames, lastTime, lessTime, status);
+	}
 }

@@ -8,7 +8,7 @@
         <result column="user_id" property="userId" jdbcType="VARCHAR" />
         <result column="username" property="username" jdbcType="VARCHAR" />
         <result column="author_name" property="authorName" jdbcType="VARCHAR" />
-        <result column="author_id" property="articleId" jdbcType="VARCHAR" />
+        <result column="author_id" property="authorId" jdbcType="VARCHAR" />
         <result column="tag" property="tag" jdbcType="VARCHAR" />
         <result column="url" property="url" jdbcType="VARCHAR" />
         <result column="pre_article" property="preArticle" jdbcType="VARCHAR" />
@@ -49,7 +49,22 @@
         <if test="lessDateTime != null">
             AND `create_time` <![CDATA[ >= ]]> #{lessDateTime, jdbcType=BIGINT}
         </if>
-        ORDER BY `create_time` DESC limit 5;
+        ORDER BY `create_time` DESC limit 6;
+    </select>
+
+
+    <select id="selectLikeTagList" resultMap="BaseResultMap" parameterType="map">
+        SELECT <include refid="Like_Column_List" />
+        FROM `like`
+        WHERE `username` = #{username, jdbcType=VARCHAR}
+        AND `status` = #{status, jdbcType=TINYINT}
+        AND `tag` = #{tag, jdbcType=VARCHAR}
+        <if test="lastDateTime != null">
+            AND `create_time` <![CDATA[ < ]]> #{lastDateTime, jdbcType=BIGINT}
+        </if>
+        <if test="lessDateTime != null">
+            AND `create_time` <![CDATA[ >= ]]> #{lessDateTime, jdbcType=BIGINT}
+        </if>
     </select>
 
 
@@ -70,4 +85,15 @@
         WHERE `username` = #{username, jdbcType=VARCHAR}
         AND `article_id` = #{articleId, jdbcType=VARCHAR}
     </delete>
+
+
+    <select id="selectTags" parameterType="map" resultType="java.lang.String">
+        SELECT `tag`
+        FROM (SELECT `tag`, count(*) AS `count`
+        FROM `like`
+        WHERE `status` = #{status, jdbcType=TINYINT}
+        AND `username` = #{username, jdbcType=VARCHAR}
+        GROUP BY `tag`
+        ORDER BY `count` DESC LIMIT 10) AS t;
+    </select>
 </mapper>
