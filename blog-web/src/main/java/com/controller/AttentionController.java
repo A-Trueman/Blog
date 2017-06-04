@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.bo.Article;
 import com.bo.Attention;
 import com.bo.Like;
+import com.common.ICacheService;
 import com.common.SystemConst;
 import com.common.util.BeanConvertor;
 import com.common.util.BlogUtils;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -34,6 +36,9 @@ public class AttentionController {
 
     @Autowired
     private ArticleService articleService;
+
+    @Resource
+    private ICacheService cacheService;
 
     @RequestMapping(value = "/attention/paid")
     @ResponseBody
@@ -87,6 +92,16 @@ public class AttentionController {
         String pageCount = request.getParameter("pageCount");
         List<String> authorNames = attentionService.getFollowee(username);
         List<Article> articles = articleService.getUsersArticles(authorNames, lastDateTime, lessDateTime, Byte.valueOf("1"));
+        String key;
+        long count = 0;
+        for (Article article : articles){
+            count = 0;
+            key = "article:ReadCount:" + article.getId();
+            if (cacheService.exists(key)) {
+                count = (long)cacheService.getLong(key);
+            }
+            article.setReadCounts((int)count);
+        }
         if (pageCount == null || pageCount.isEmpty()) {
             modelAndView.addObject("pageCount","1");
             modelAndView.addObject("lessDateTime", null);

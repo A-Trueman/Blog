@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Lincg
-  Date: 2017/5/28
-  Time: 18:02
+  Date: 2017/6/2
+  Time: 15:32
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -52,7 +52,7 @@
         <nav class="blog-nav">
             <a class="blog-nav-item" href="/index.html">首页</a>
             <a class="blog-nav-item" href="/attention.html">关注</a>
-            <a class="blog-nav-item active" href="/allSite.html">全站</a>
+            <a class="blog-nav-item" href="/allSite.html">全站</a>
             <a class="blog-nav-item" href="/like.html">收藏</a>
             <a class="blog-nav-item" href="/myBlog.html">我的博客</a>
             <c:choose>
@@ -117,66 +117,51 @@
         </div>
     </c:if>
     <div class="row minHeight">
-        <div class="col-sm-8 blog-main">
-            <c:forEach items="${articles}" var="article">
-                <div class="blog-post">
-                    <a class="blog-post-title" href= ${article.articleUrl}>${article.title}</a>
-                    <p>${article.preArticle}</p>
-                    <p class="blog-post-meta right">${article.createTime}&nbsp;&nbsp;by&nbsp;&nbsp;<a href= ${article.usernameUrl}>${article.username}</a>&nbsp;&nbsp; 阅读数量(${article.readCounts})</p>
-                    <p class="clear"></p>
-                    <hr>
-                </div>
-            </c:forEach>
 
-            <ul class="pagination">
-                <c:if test="${not empty lessDateTime || not empty lastDateTime}">
-                    <c:choose>
-                        <c:when test="${empty lessDateTime}">
-                            <li class="disabled"><a href="#">前一页</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="/allSite.html?lessDateTime=${lessDateTime}&pageCount=${pageCount}&tag=${tag}">前一页</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                    <li class="active"><a href="#">第${pageCount}页</a></li>
-                    <c:choose>
-                        <c:when test="${empty lastDateTime}">
-                            <li class="disabled"><a href="#">后一页</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="/allSite.html?lastDateTime=${lastDateTime}&pageCount=${pageCount}&tag=${tag}">后一页</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </c:if>
-            </ul>
+        <div class="col-sm-12 blog-main">
+            <h1 class="search-title">搜索结果</h1>
+            <hr>
+            <c:choose>
+                <c:when test="${empty articles}">
+                    <h2 class="search-header-title">抱歉，搜索不到结果</h2>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach items="${articles}" var="article">
+                        <div class="blog-post">
+                            <a class="blog-post-title" href= ${article.articleUrl}>${article.title}</a>
+                            <p>${article.preArticle}</p>
+                            <p class="blog-post-meta right">${article.createTime}&nbsp;&nbsp;by&nbsp;&nbsp;<a href= ${article.usernameUrl}>${article.username}</a>&nbsp;&nbsp; 阅读数量(${article.readCounts})</p>
+                            <p class="clear"></p>
+                            <hr>
+                        </div>
+                    </c:forEach>
+
+                    <ul class="pagination">
+                        <c:if test="${not empty lessDateTime || not empty lastDateTime}">
+                            <c:choose>
+                                <c:when test="${empty lessDateTime}">
+                                    <li class="disabled"><a href="#">前一页</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="/search.html?lessDateTime=${lessDateTime}&pageCount=${pageCount}&tag=${tag}">前一页</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                            <li class="active"><a href="#">第${pageCount}页</a></li>
+                            <c:choose>
+                                <c:when test="${empty lastDateTime}">
+                                    <li class="disabled"><a href="#">后一页</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a href="/search.html?lastDateTime=${lastDateTime}&pageCount=${pageCount}&tag=${tag}">后一页</a></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
+                    </ul>
+                </c:otherwise>
+            </c:choose>
+
         </div>
 
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-            <div class="sidebar-module">
-                <h4>分类标签</h4>
-                <ol class="list-unstyled">
-                    <c:choose>
-                        <c:when test="${not empty tags}">
-                            <c:forEach var="tag" items="${tags}">
-                                <li><a href="/allSite.html?tag=${tag}">${tag}</a></li>
-                            </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <li>无</li>
-                        </c:otherwise>
-                    </c:choose>
-                </ol>
-            </div>
-
-            <div class="sidebar-module">
-                <h4>Elsewhere</h4>
-                <ol class="list-unstyled">
-                    <li><a href="https://github.com">GitHub</a></li>
-                    <li><a href="https://twitter.com/">Twitter</a></li>
-                    <li><a href="https://www.facebook.com/">Facebook</a></li>
-                </ol>
-            </div>
-        </div>
     </div>
 </div>
 <footer class="blog-footer">
@@ -200,4 +185,3 @@
 </script>
 </body>
 </html>
-

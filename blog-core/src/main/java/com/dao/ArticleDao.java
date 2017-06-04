@@ -145,4 +145,30 @@ public interface ArticleDao {
 	 * @return 标签
 	 */
 	public List<String> selectTags(Byte status);
+
+
+	/**
+	 * 查找博文
+	 *
+	 * @param searchCond 查询条件
+	 * @param lastDateTime 截止时间
+	 * @param lessDateTime 起始时间
+	 * @param status 状态
+	 *
+	 * @return 博文列表
+	 */
+    List<Article> selectArticleListByCond(String searchCond,
+										  Long lastDateTime,
+										  Long lessDateTime,
+										  Byte status);
+
+
+	/**
+	 * 获取阅读数量
+	 *
+	 * @param articleId 博文id
+	 *
+	 * @return 阅读数量
+	 */
+	int selectReadCount(String articleId);
 }

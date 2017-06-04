@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.bo.Article;
+import com.common.ICacheService;
 import com.common.SystemConst;
 import com.common.util.BeanConvertor;
 import com.service.ArticleService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -30,6 +32,9 @@ public class ArticleController {
 
     @Autowired
     private LikeService likeService;
+
+    @Resource
+    private ICacheService cacheService;
 
     @RequestMapping(value = "/article/*", method = RequestMethod.GET)
     public ModelAndView getArticle(HttpServletRequest request, HttpSession session) {
@@ -57,15 +62,25 @@ public class ArticleController {
                 }
             }
         }
-        modelAndView.setViewName("/article");
         modelAndView.addObject("username", username);
-        modelAndView.addObject("article", BeanConvertor.convert2ArticleVo(article, Byte.valueOf("0")));
 
         if (username != null && !username.isEmpty()) {
             if (likeService.getLike(username, articleId, Byte.valueOf("1")) != null) {
                 modelAndView.addObject("isCollected", true);
             }
         }
+        String key = "article:ReadCount:" + articleId;
+        if (!cacheService.exists(key)) {
+            long value = articleService.getReadCount(articleId);
+            cacheService.setLong(key, value);
+        }
+        cacheService.increment(key);
+        long count = (long)cacheService.getLong(key);
+        article.setReadCounts((int)count);
+
+        modelAndView.addObject("article", BeanConvertor.convert2ArticleVo(article, Byte.valueOf("0")));
+        modelAndView.setViewName("/article");
+
         return modelAndView;
     }
 

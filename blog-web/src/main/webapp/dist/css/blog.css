@@ -37,7 +37,7 @@ h6, .h6 {
     }
 }
 .minHeight {
-    min-height: 800px;
+    min-height: 720px;
 }
 .right{
     float: right;
@@ -200,11 +200,21 @@ a:focus {
     color: #999;
     margin-bottom: 10px;
 }
-
-
-/*
- * Main column and sidebar layout
- */
+.search-title {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: normal;
+    color: #2c5378;
+}
+.search-header-title {
+    color: #7a7a7a;
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+    /*
+     * Main column and sidebar layout
+     */
 
 .blog-main {
     font-size: 14px;

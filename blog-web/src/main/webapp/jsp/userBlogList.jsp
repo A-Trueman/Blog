@@ -40,9 +40,9 @@
 <div class="blog-header">
     <img src="../img/header/logo.png" class="left blog-logo">
     <div class="container">
-        <form class="search-form-wrapper">
+        <form class="search-form-wrapper" action="/search.html" method="post">
             <button type="submit" class="btn btn-default">Search</button>
-            <input type="text" class="form-control" placeholder="Search" required>
+            <input type="text" name="searchCond" class="form-control" placeholder="Search" required>
         </form>
     </div>
 </div>

@@ -98,4 +98,24 @@ public interface ArticleMapper {
      * @return 标签
      */
     List<String> selectTags(Byte status);
+
+
+    /**
+     * 查找博文
+     *
+     * @param cond 查询条件
+     *
+     * @return 博文
+     */
+    List<Article> selectArticleListByCond(Map<String, Object> cond);
+
+
+    /**
+     * 获取阅读数量
+     *
+     * @param articleId 博文ID
+     *
+     * @return 阅读数量
+     */
+    int selectReadCount(String articleId);
 }

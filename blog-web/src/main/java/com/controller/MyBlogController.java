@@ -2,6 +2,7 @@ package com.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bo.Article;
+import com.common.ICacheService;
 import com.common.SystemConst;
 import com.common.util.BeanConvertor;
 import com.common.util.BlogUtils;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -39,6 +41,9 @@ public class MyBlogController {
 
     @Autowired
     private ArticleService articleService;
+
+    @Resource
+    private ICacheService cacheService;
 
     @RequestMapping("/myBlog.html")
     public ModelAndView getBlog(HttpSession session){
@@ -67,6 +72,16 @@ public class MyBlogController {
             articles = articleService.getUserArticleList(username, lastDateTime, lessDateTime, Byte.parseByte(status));
         } else {
             articles = articleService.getUserTagArticleList(username, tag, lastDateTime, lessDateTime, Byte.parseByte(status));
+        }
+        long count = 0;
+        String key;
+        for (Article article : articles){
+            count = 0;
+            key = "article:ReadCount:" + article.getId();
+            if (cacheService.exists(key)) {
+                count = (long)cacheService.getLong(key);
+            }
+            article.setReadCounts((int)count);
         }
         modelAndView.addObject("tag", tag);
         modelAndView.setViewName("/myBlogList");
@@ -211,7 +226,6 @@ public class MyBlogController {
         articleId = articleId.substring(0, articleId.length() - 5);
         Article article = articleService.selectArticleById(articleId);
         modelAndView.setViewName("/myArticle");
-        modelAndView.addObject("article", BeanConvertor.convert2ArticleVo(article, Byte.valueOf("1")));
         String initData = null;
         InputStream inputStream = null;
         try {
@@ -231,6 +245,16 @@ public class MyBlogController {
                 }
             }
         }
+
+        String key = "article:ReadCount:" + articleId;
+        if (!cacheService.exists(key)) {
+            long value = articleService.getReadCount(articleId);
+            cacheService.setLong(key, value);
+        }
+        cacheService.increment(key);
+        long count = (long)cacheService.getLong(key);
+        article.setReadCounts((int)count);
+        modelAndView.addObject("article", BeanConvertor.convert2ArticleVo(article, Byte.valueOf("1")));
         modelAndView.addObject("initData", initData);
 
         return modelAndView;

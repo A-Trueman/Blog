@@ -142,4 +142,25 @@
         ORDER BY `count` DESC LIMIT 10) AS t;
     </select>
 
+
+    <select id="selectArticleListByCond" resultMap="BaseResultMap" parameterType="map">
+        SELECT <include refid="Article_Column_List" />
+        FROM `article`
+        WHERE `title` LIKE "%"#{keyWord}"%"
+        AND `status` = #{status, jdbcType=TINYINT}
+        <if test="lastDateTime != null">
+            AND `create_time` <![CDATA[ < ]]> #{lastDateTime, jdbcType=BIGINT}
+        </if>
+        <if test="lessDateTime != null">
+            AND `create_time` <![CDATA[ >= ]]> #{lessDateTime, jdbcType=BIGINT}
+        </if>
+        ORDER BY `create_time` DESC limit 6;
+    </select>
+
+
+    <select id="selectReadCount" resultType="int" parameterType="string">
+        SELECT `read_counts`
+        FROM `article`
+        WHERE `id` = #{articleId, jdbcType=VARCHAR}
+    </select>
 </mapper>

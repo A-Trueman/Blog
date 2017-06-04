@@ -113,4 +113,30 @@ public interface ArticleService {
 	                               String lastDateTime,
 	                               String lessDateTime,
 	                               Byte status);
+
+
+	/**
+	 * 查找文章
+	 *
+	 * @param searchCond 查询条件
+	 * @param lastDateTime 截止时间
+	 * @param lessDateTime 起始时间
+	 * @param status 状态
+	 *
+	 * @return 文章列表
+	 */
+    List<Article> getArticleListByCond(String searchCond,
+									   String lastDateTime,
+									   String lessDateTime,
+									   Byte status);
+
+
+	/**
+	 * 获得阅读数量
+	 *
+	 * @param articleId 博文ID
+	 *
+	 * @return 阅读数量
+	 */
+	int getReadCount(String articleId);
 }

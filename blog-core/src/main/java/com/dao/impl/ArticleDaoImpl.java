@@ -202,4 +202,41 @@ public class ArticleDaoImpl implements ArticleDao{
 	public List<String> selectTags(Byte status) {
 		return articleMapper.selectTags(status);
 	}
+
+
+	/**
+	 * 查找博文
+	 *
+	 * @param searchCond 查询条件
+	 * @param lastDateTime 截止时间
+	 * @param lessDateTime 起始时间
+	 * @param status 状态
+	 *
+	 * @return 博文列表
+	 */
+	public List<Article> selectArticleListByCond(String searchCond,
+												 Long lastDateTime,
+												 Long lessDateTime,
+												 Byte status) {
+		Map<String, Object> cond = new HashMap<>();
+
+		cond.put("keyWord", searchCond);
+		cond.put("lastDateTime", lastDateTime);
+		cond.put("lessDateTime", lessDateTime);
+		cond.put("status", status);
+
+		return articleMapper.selectArticleListByCond(cond);
+	}
+
+
+	/**
+	 * 获取阅读数量
+	 *
+	 * @param articleId 博文id
+	 *
+	 * @return 阅读数量
+	 */
+	public int selectReadCount(String articleId) {
+		return articleMapper.selectReadCount(articleId);
+	}
 }

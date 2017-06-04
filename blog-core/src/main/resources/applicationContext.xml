@@ -84,6 +84,20 @@
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
         </property>
     </bean>
+
+    <bean id="redisLongTemplate" class="org.springframework.data.redis.core.RedisTemplate" >
+        <property name="connectionFactory" ref="connectionFactory" />
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.GenericToStringSerializer">
+                <constructor-arg>
+                    <value>java.lang.Long</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
     <!-- cache配置 -->
     <bean id="cacheService" class="com.common.impl.CacheService" />
 

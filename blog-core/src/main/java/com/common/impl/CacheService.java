@@ -16,6 +16,9 @@ public final class CacheService implements ICacheService{
     @Resource
     private RedisTemplate<Serializable, Object> redisTemplate;
 
+    @Resource
+    private RedisTemplate<Serializable, Object> redisLongTemplate;
+
     /**
      * 删除指定keys的数据
      *
@@ -59,6 +62,19 @@ public final class CacheService implements ICacheService{
 
 
     /**
+     * 读取缓存
+     *
+     * @param key 键值
+     *
+     * @return value值
+     */
+    @Override
+    public Object getLong(final String key) {
+        return redisLongTemplate.opsForValue().get(key);
+    }
+
+
+    /**
      * 写入缓存
      *
      * @param key 键名
@@ -71,6 +87,27 @@ public final class CacheService implements ICacheService{
         boolean result = false;
         try {
             redisTemplate.opsForValue().set(key, value);
+            result = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    /**
+     * 写入缓存
+     *
+     * @param key 键名
+     * @param value 键值
+     *
+     * @return 是否成功
+     */
+    @Override
+    public boolean setLong(final String key, Long value) {
+        boolean result = false;
+        try {
+            redisLongTemplate.opsForValue().set(key, value);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,5 +137,15 @@ public final class CacheService implements ICacheService{
         }
 
         return result;
+    }
+
+
+    /**
+     *
+     * @param key 键名
+     *
+     */
+    public void increment(final String key) {
+        redisLongTemplate.opsForValue().increment(key, 1);
     }
 }

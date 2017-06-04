@@ -3,6 +3,7 @@ package com.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.bo.Article;
 import com.bo.Like;
+import com.common.ICacheService;
 import com.common.SystemConst;
 import com.common.util.BeanConvertor;
 import com.common.util.BlogUtils;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -31,6 +33,9 @@ public class LikeController {
 
     @Autowired
     LikeService likeService;
+
+    @Resource
+    private ICacheService cacheService;
 
     @RequestMapping(value = "/like/collect", method = RequestMethod.POST)
     @ResponseBody
@@ -81,6 +86,16 @@ public class LikeController {
             likes = likeService.getLikeList(username, lastDateTime, lessDateTime, Byte.valueOf("1"));
         } else {
             likes = likeService.getLikeTagList(username, tag, lastDateTime, lessDateTime, Byte.valueOf("1"));
+        }
+        String key;
+        long count = 0;
+        for (Like article : likes){
+            count = 0;
+            key = "article:ReadCount:" + article.getId();
+            if (cacheService.exists(key)) {
+                count = (long)cacheService.getLong(key);
+            }
+            article.setReadCounts((int)count);
         }
         modelAndView.addObject("tag", tag);
         if (pageCount == null || pageCount.isEmpty()) {

@@ -71,6 +71,7 @@ public class BeanConvertor {
 		articleVo.setUsernameUrl(SystemConst.USER_BLOG_PATH + like.getAuthorName() + ".html");
 		articleVo.setArticleUrl(SystemConst.OTHER_ARTICLE_PATH + like.getArticleId() + ".html");
 		articleVo.setArticleRealUrl(SystemConst.HTML_URL + like.getArticleId() + ".htm");
+		articleVo.setReadCounts(like.getReadCounts());
 		articleVo.setCreateTime(BlogUtils.longTime2Text(like.getArticleCreateTime()));
 		if(like.getPreArticle().trim().length() == 128) {
 			articleVo.setPreArticle(like.getPreArticle() + "...");

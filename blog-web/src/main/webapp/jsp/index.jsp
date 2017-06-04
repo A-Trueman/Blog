@@ -41,9 +41,9 @@
 <div class="blog-header">
     <img src="../img/header/logo.png" class="left blog-logo">
     <div class="container">
-        <form class="search-form-wrapper">
+        <form class="search-form-wrapper" action="/search.html" method="post">
             <button type="submit" class="btn btn-default">Search</button>
-            <input type="text" class="form-control" placeholder="Search" required>
+            <input type="text" name="searchCond" class="form-control" placeholder="Search" required>
         </form>
     </div>
 
@@ -121,27 +121,53 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-            <div class="blog-post">
-                <a class="blog-post-title">Sample blog post</a>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-            </div>
+            <c:forEach items="${articles}" var="article">
+                <div class="blog-post">
+                    <a class="blog-post-title" href= ${article.articleUrl}>${article.title}</a>
+                    <p>${article.preArticle}</p>
+                    <p class="blog-post-meta right">${article.createTime}&nbsp;&nbsp;by&nbsp;&nbsp;<a href= ${article.usernameUrl}>${article.username}</a>&nbsp;&nbsp; 阅读数量(${article.readCounts})</p>
+                    <p class="clear"></p>
+                    <hr>
+                </div>
+            </c:forEach>
+
+            <ul class="pagination">
+                <c:if test="${not empty lessDateTime || not empty lastDateTime}">
+                    <c:choose>
+                        <c:when test="${empty lessDateTime}">
+                            <li class="disabled"><a href="#">前一页</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/index.html?lessDateTime=${lessDateTime}&pageCount=${pageCount}&tag=${tag}">前一页</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    <li class="active"><a href="#">第${pageCount}页</a></li>
+                    <c:choose>
+                        <c:when test="${empty lastDateTime}">
+                            <li class="disabled"><a href="#">后一页</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/index.html?lastDateTime=${lastDateTime}&pageCount=${pageCount}&tag=${tag}">后一页</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:if>
+            </ul>
         </div>
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
             <div class="sidebar-module">
                 <h4>分类标签</h4>
                 <ol class="list-unstyled">
-                    <li><a href="#">JAVA</a></li>
-                    <li><a href="#">C++</a></li>
-                    <li><a href="#">JAVASCRIPT</a></li>
-                    <li><a href="#">C#</a></li>
-                    <li><a href="#">随笔</a></li>
-                    <li><a href="#">前端</a></li>
-                    <li><a href="#">手机开发</a></li>
-                    <li><a href="#">数据库</a></li>
-                    <li><a href="#">其他</a></li>
+                    <c:choose>
+                        <c:when test="${not empty tags}">
+                            <c:forEach var="tag" items="${tags}">
+                                <li><a href="/index.html?tag=${tag}">${tag}</a></li>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <li>无</li>
+                        </c:otherwise>
+                    </c:choose>
                 </ol>
             </div>
 
@@ -169,6 +195,7 @@
 <script src="../dist/js/sweetalert.min.js"></script>
 <script src="../dist/js/user.js"></script>
 <script>
+
 
     $(function(){
         /**

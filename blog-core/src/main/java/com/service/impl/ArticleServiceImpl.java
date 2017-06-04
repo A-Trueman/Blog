@@ -183,4 +183,43 @@ public class ArticleServiceImpl implements ArticleService{
 
 		return articleDao.selectUsersArticle(usernames, lastTime, lessTime, status);
 	}
+
+
+	/**
+	 * 查找文章
+	 *
+	 * @param searchCond 查询条件
+	 * @param lastDateTime 截止时间
+	 * @param lessDateTime 起始时间
+	 * @param status 状态
+	 *
+	 * @return 文章列表
+	 */
+	public List<Article> getArticleListByCond(String searchCond,
+											  String lastDateTime,
+											  String lessDateTime,
+											  Byte status) {
+		Long lastTime = null, lessTime = null;
+
+		if (lastDateTime != null && !lastDateTime.isEmpty()) {
+			lastTime = Long.parseLong(lastDateTime);
+		}
+		if (lessDateTime != null && !lessDateTime.isEmpty()) {
+			lessTime = Long.parseLong(lessDateTime);
+		}
+
+		return articleDao.selectArticleListByCond(searchCond, lastTime, lessTime, status);
+	}
+
+
+	/**
+	 * 获得阅读数量
+	 *
+	 * @param articleId 博文ID
+	 *
+	 * @return 阅读数量
+	 */
+	public int getReadCount(String articleId) {
+		return articleDao.selectReadCount(articleId);
+	}
 }
