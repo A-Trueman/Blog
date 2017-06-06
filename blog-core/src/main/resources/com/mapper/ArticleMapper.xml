@@ -95,10 +95,14 @@
         SELECT <include refid="Article_Column_List" />
         FROM `article`
         WHERE `username` in
-        <foreach collection="usernames" item="item" index="index" open="(" separator="," close=")">
-            #{item}
-        </foreach>
-        AND `status` = #{status, jdbcType=TINYINT}
+        `status` = #{status, jdbcType=TINYINT}
+        <if test="usernames != null">
+            AND
+            <foreach collection="usernames" item="item" index="index" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+
         <if test="lastDateTime != null">
             AND `create_time` <![CDATA[ < ]]> #{lastDateTime, jdbcType=BIGINT}
         </if>
@@ -163,4 +167,10 @@
         FROM `article`
         WHERE `id` = #{articleId, jdbcType=VARCHAR}
     </select>
+
+
+    <delete id="deleteArticle" parameterType="string">
+        DELETE FROM `article`
+        WHERE `id` = #{articleId, jdbcType=VARCHAR}
+    </delete>
 </mapper>

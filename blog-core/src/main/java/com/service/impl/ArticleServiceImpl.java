@@ -222,4 +222,16 @@ public class ArticleServiceImpl implements ArticleService{
 	public int getReadCount(String articleId) {
 		return articleDao.selectReadCount(articleId);
 	}
+
+
+	/**
+	 * 删除博文
+	 *
+	 * @param id 博文id
+	 *
+	 * @return 删除结果
+	 */
+	public int deleteArticle(String id) {
+		return articleDao.deleteArticle(id);
+	}
 }

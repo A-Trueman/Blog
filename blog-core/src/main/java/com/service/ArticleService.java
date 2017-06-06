@@ -139,4 +139,14 @@ public interface ArticleService {
 	 * @return 阅读数量
 	 */
 	int getReadCount(String articleId);
+
+
+	/**
+	 * 删除博文
+	 *
+	 * @param id 博文id
+	 *
+	 * @return 删除结果
+	 */
+    int deleteArticle(String id);
 }

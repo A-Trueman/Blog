@@ -121,8 +121,9 @@ public class LoginController {
 
     @RequestMapping("/user/register.html")
     @ResponseBody
-    public int register(@RequestBody User user) {
-        return userService.registerUser(user);
+    public String register(@RequestBody User user) {
+        int result = userService.registerUser(user);
+        return String.valueOf(result);
     }
 
 

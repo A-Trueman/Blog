@@ -59,8 +59,11 @@
                 <div class="col-sm-4">
                     <label>标签：</label><code>${article.tag}</code>
                 </div>
-                <div class="col-sm-2 col-sm-offset-6">
+                <div class="col-sm-2 col-sm-offset-4">
                     <a class="right" href="/writeBlog.html?id=${article.id}">编辑</a>
+                </div>
+                <div class="col-sm-2">
+                    <a class="right" href="/deleteBlog.html?id=${article.id}">删除</a>
                 </div>
             </div>
         </div>

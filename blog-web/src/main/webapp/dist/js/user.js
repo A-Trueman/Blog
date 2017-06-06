@@ -50,7 +50,7 @@ $("#registerButton").click(function () {
         data: jsonData,
 
         success: function (data) {
-            if(data == 1) {
+            if(data == "1") {
 
                 swal({
                     title: "注册成功",
@@ -61,7 +61,7 @@ $("#registerButton").click(function () {
 
                 $('#loginModal').modal('hide');
                 $(".form-change").trigger('click');
-            } else if(data == 2) {
+            } else if(data == "2") {
                 swal({
                     title: "用户名重复",
                     type: "error",

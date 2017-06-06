@@ -239,4 +239,16 @@ public class ArticleDaoImpl implements ArticleDao{
 	public int selectReadCount(String articleId) {
 		return articleMapper.selectReadCount(articleId);
 	}
+
+
+	/**
+	 * 删除博文
+	 *
+	 * @param articleId 博文ID
+	 *
+	 * @return 删除结果
+	 */
+	public int deleteArticle(String articleId) {
+		return articleMapper.deleteArticle(articleId);
+	}
 }

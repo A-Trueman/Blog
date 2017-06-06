@@ -171,4 +171,14 @@ public interface ArticleDao {
 	 * @return 阅读数量
 	 */
 	int selectReadCount(String articleId);
+
+
+	/**
+	 * 删除博文
+	 *
+	 * @param id 博文ID
+	 *
+	 * @return 删除结果
+	 */
+    int deleteArticle(String id);
 }

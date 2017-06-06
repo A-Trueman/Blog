@@ -260,5 +260,15 @@ public class MyBlogController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/deleteBlog", method = RequestMethod.GET)
+    public ModelAndView deleteBlog(HttpSession session, HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/myBlogList.html");
+        String id = request.getParameter("id");
+        if (id != null && id.length() == 32) {
+            articleService.deleteArticle(id);
+        }
+        return modelAndView;
+    }
 
 }
